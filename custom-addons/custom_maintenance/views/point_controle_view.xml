@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="view_maintenance_checkpoint_line_tree" model="ir.ui.view">
+		<field name="name">maintenance.checkpoint.line.tree</field>
+		<field name="model">maintenance.checkpoint.line</field>
+		<field name="priority">2</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="checkpoint_id"/>
+				<field name="fait" />
+				<field name="pas_fait" />
+				<field name="autre" />
+				<field name="observation" />
+			</tree>
+		</field>
+	</record>
+	<record id="view_maintenance_checkpoint_line_form" model="ir.ui.view">
+		<field name="name">maintenance.checkpoint.line.form</field>
+		<field name="model">maintenance.checkpoint.line</field>
+		<field name="arch" type="xml">
+			<form string="Points de controle">
+				<sheet>
+					<group>
+                        <group>
+                            <field name="checkpoint_id" />
+                            <field name="observation" />
+                        </group>
+                        <group>
+                            <field name="fait" />
+                            <field name="pas_fait" />
+                            <field name="autre" />
+                        </group>
+                    </group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="action_maintenance_checkpoint_line"
+		model="ir.actions.act_window">
+		<field name="name">Points de controle</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">maintenance.checkpoint.line</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Click here to create a record
+			</p>
+		</field>
+	</record>
+
+    <!-- <menuitem id="point_controle_menu" 
+        sequence="12"
+        parent="maintenance.menu_maintenance_configuration" 
+        action="action_maintenance_checkpoint_line"/> -->
+
+
+	<record id="view_maintenance_checkpoint_tree" model="ir.ui.view">
+		<field name="name">maintenance.checkpoint.tree</field>
+		<field name="model">maintenance.checkpoint</field>
+		<field name="priority">2</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+	<record id="view_maintenance_checkpoint_form" model="ir.ui.view">
+		<field name="name">maintenance.checkpoint.form</field>
+		<field name="model">maintenance.checkpoint</field>
+		<field name="arch" type="xml">
+			<form string="Points de controle">
+				<sheet>
+					<group>
+						<field name="name" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="action_maintenance_checkpoint"
+		model="ir.actions.act_window">
+		<field name="name">Liste points controle</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">maintenance.checkpoint</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Click here to create a record
+			</p>
+		</field>
+	</record>
+
+	<menuitem id="point_controle_menu_1" 
+		sequence="11"
+		parent="maintenance.menu_maintenance_configuration" 
+		action="action_maintenance_checkpoint"/>
+	
+</odoo>	
+			
+			
+			
+			

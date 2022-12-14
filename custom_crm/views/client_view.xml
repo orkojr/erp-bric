@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+         <!-- vue liste des clients -->
+        <record id="client_view_tree" model="ir.ui.view">
+            <field name="name">client.list.tree</field>
+            <field name="model">bric.client</field>
+            <field name="arch" type="xml">
+                <tree string="client List">
+                    <field name="code_client" />
+                    <field name="prenom" />
+                    <field name="nom" />
+                    <field name="email" />
+                    <field name="ville" />
+                    <field name="cp" />
+                    <field name="pays" />
+                    <field name="phone" />
+                </tree>
+            </field>
+        </record>
+        <!-- vue Formulaire client -->
+        <record id="client_view_form" model="ir.ui.view">
+            <field name="name">client.view.form</field>
+            <field name="model">bric.client</field>
+            <field name="arch" type="xml">
+                <form string="client Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code_client" />
+                                <field name="prenom" />
+                                <field name="nom" />
+                                <field name="email" />
+                            </group>
+                            <group>
+                                <field name="ville" />
+                                <field name="cp" />
+                                <field name="pays" />
+                                <field name="phone" />
+                            </group>
+                            <group>
+                                <field name="user_id" />
+                                <field name="quartier_id" />
+                            </group>
+                        </group>
+                        <!-- <notebook>
+                            <page  string="List of Classes">
+                                <field name="classe_ids" />
+                            </page>
+                            <page  string="List of Chambres">
+                                <field name="chambre_ids" />
+                            </page>
+                        </notebook> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Action a effectuer sur les vues -->
+        <record id="client_action" model="ir.actions.act_window">
+            <field name="name">Clients</field>
+            <field name="res_model">bric.client</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu principal -->
+        <menuitem
+            id="bric_menu_root"
+            name="Custom CRM"
+            sequence="10"/>
+            <!-- Menu client -->
+        <menuitem
+            id="bric_client_cat"
+            name="Clients"
+            parent="bric_menu_root"
+            sequence="10"/>
+            <!-- Menu actions -->
+            <menuitem
+                id="bric_client_list"
+                name="List of Clients"
+                action="client_action"
+                parent="bric_client_cat"
+                sequence="10"/>
+    
+    </data>
+    
+
+</odoo>

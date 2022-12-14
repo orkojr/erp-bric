@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+         <!-- vue liste des zones -->
+        <record id="zone_view_tree" model="ir.ui.view">
+            <field name="name">zone.list.tree</field>
+            <field name="model">bric1.zone</field>
+            <field name="arch" type="xml">
+                <tree string="zone List">
+                    <field name="designation" />
+                </tree>
+            </field>
+        </record>
+        <!-- vue Formulaire zone -->
+        <record id="zone_view_form" model="ir.ui.view">
+            <field name="name">zone.view.form</field>
+            <field name="model">bric1.zone</field>
+            <field name="arch" type="xml">
+                <form string="zone Form">
+                    <sheet>
+                        <group>
+                            <group>
+                            <field name="designation" />
+                            <field name="frais_transport_man" />
+                            <field name="frais_transport_actros" />
+                        </group>
+                        <group>
+                            <field name="nb_quartier" />
+                        </group>
+                        </group>
+                        
+                        <notebook>
+                            <page  string="Liste des Quartiers">
+                                <field name="quartier_ids" />
+                            </page>
+                            <!-- <page  string="List of Chambres">
+                                <field name="chambre_ids" />
+                            </page> -->
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Action a effectuer sur les vues -->
+        <record id="zone_action" model="ir.actions.act_window">
+            <field name="name">Zones</field>
+            <field name="res_model">bric1.zone</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu principal -->
+        <menuitem
+            id="bric1_menu_root"
+            name="Custom Partner"
+            sequence="10"/>
+            <!-- Menu zone -->
+        <menuitem
+            id="bric1_zone_cat"
+            name="Zones"
+            parent="bric1_menu_root"
+            sequence="10"/>
+            <!-- Menu actions -->
+            <menuitem
+                id="bric1_zone_list"
+                name="Liste Zones"
+                action="zone_action"
+                parent="bric1_zone_cat"
+                sequence="10"/>
+    
+    </data>
+    
+
+</odoo>

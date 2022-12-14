@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- <menuitem
+        id="mrp_purchase_order1"
+        sequence="4"
+        parent="mrp.menu_mrp_root"
+        name="Demandes de prix"
+        action="purchase.purchase_rfq"
+        groups="mrp.group_mrp_manager"
+    /> -->
+    <menuitem
+    id="account_purchase_order1"
+    sequence="4"
+    parent="account.menu_finance"
+    name="Demandes de prix"
+    action="purchase.purchase_rfq"
+    groups="account.group_account_manager"
+    />
+
+    <!-- <menuitem
+    id="mrp_livraison1"
+    sequence="9"
+    parent="mrp.menu_mrp_root"
+    name="Tous les transferts"
+    action="stock.stock_picking_action_picking_type"
+    groups="mrp.group_mrp_manager"
+    /> -->
+    <menuitem
+    id="purchase_transfert1"
+    sequence="4"
+    parent="purchase.menu_purchase_root"
+    name="Tous les transferts"
+    action="stock.stock_picking_action_picking_type"
+    groups="purchase.group_purchase_manager"
+    />
+
+    <!-- <menuitem
+    id="purchase_planning1"
+    sequence="5"
+    parent="purchase.menu_purchase_root"
+    name="Planning de production"
+    action="mrp_plan.action_mrp_plan_menu"
+    groups="purchase.group_purchase_manager"
+    /> -->
+    <!-- <menuitem
+    id="crm_planning1"
+    sequence="5"
+    parent="crm.crm_menu_root"
+    name="Planning de production"
+    action="mrp_plan.action_mrp_plan_menu"
+    groups="sales_team.group_sale_manager"
+    /> -->
+
+    <menuitem
+    id="fleet_planning1"
+    sequence="5"
+    parent="fleet.menu_root"
+    name="Planning de production"
+    action="mrp_plan.action_mrp_plan_menu"
+    groups="fleet.fleet_group_manager"
+    />
+
+    <record id="stock.stock_picking_action_picking_type" model="ir.actions.act_window">
+        <field name="name">All Transfers</field>
+        <field name="res_model">stock.picking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,kanban,form,calendar</field>
+        <field name="domain"></field>
+        <field name="context">{'contact_display': 'partner_address', 'search_default_picking_type' :1,'search_default_name':'WH/IN/'}</field>
+        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No transfer found. Let's create one!
+                </p><p>
+                    Transfers allow you to move products from one location to another.
+                </p>
+            </field>
+    </record>
+</odoo>

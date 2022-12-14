@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="mrp_production_inherit_mrp_plan" model="ir.ui.view">
+        <field name="name">mrp.production.inherit</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Informations supplementaires" name="miscellaneous" >
+                    <group>
+                        <group>
+                            <field name="main_oeuvre_requise"/>
+                        </group>
+                        <group>
+                            <field name="main_oeuvre_temporaire"/>
+                        </group>
+
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

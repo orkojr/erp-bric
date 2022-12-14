@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<templates id="template" xml:space='preserve'>
+    
+    <t t-name="Dashboard">
+        <div class="oh_dashboards">
+            <div class="container-fluid o_pos_dashboard"></div>
+        </div>
+    </t>
+    
+</templates>

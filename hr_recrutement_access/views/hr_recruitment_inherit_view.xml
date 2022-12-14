@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem
+        name="Recruitment"
+        id="hr_recruitment.menu_hr_recruitment_root"
+        web_icon="hr_recruitment,static/description/icon.png"
+        groups="hr_recruitment.group_hr_recruitment_user,hr_recrutement_access.access_manager_group,hr_recrutement_access.access_department_group,hr_recrutement_access.access_admin_group"
+        sequence="210"/>
+
+        <menuitem id="hr_recruitment.menu_hr_department" name="Departments"
+            parent="hr_recruitment.menu_hr_recruitment_configuration" action="hr_recruitment.action_hr_department"
+            groups="hr_recruitment.group_hr_recruitment_user,hr_recrutement_access.access_manager_group"/>
+
+        <menuitem id="hr_expense.menu_hr_expense_configuration" 
+            name="Configuration" 
+            parent="hr_expense.menu_hr_expense_root"
+            sequence="100"
+            groups="hr_expense.group_hr_expense_team_approver,hr_expense.group_hr_expense_manager"
+            />
+        <menuitem id="hr_recruitment.hr_recruitment_menu_config_activity_type"
+            action="hr_recruitment.mail_activity_type_action_config_hr_applicant"
+            parent="hr_recruitment.menu_hr_recruitment_configuration"
+            groups="hr_recrutement_access.access_manager_group,hr_recruitment.group_hr_recruitment_manager"
+            />
+
+            <menuitem id="hr_expense.hr_expense_menu_config_activity_type"
+            action="hr_expense.mail_activity_type_action_config_hr_expense"
+            parent="hr_expense.menu_hr_expense_configuration"
+            groups="hr_expense.group_hr_expense_manager"/>
+<!-- 
+            <menuitem id="hr_recruitment.hr_recruitment_menu_config_activity_type"
+        action="hr_recruitment.mail_activity_type_action_config_hr_applicant"
+        parent="hr_recruitment.menu_hr_recruitment_configuration"/> -->
+</odoo>

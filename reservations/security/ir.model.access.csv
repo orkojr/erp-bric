@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_categorie_user,CategorieUser,model_reservation_categorie,reservation_group_user,1,0,0,0
+access_categorie_manager,CategorieManager,model_reservation_categorie,reservation_group_manager,1,1,1,1
+access_chambre_user,ChambreUser,model_reservation_chambre,reservation_group_user,1,0,0,0
+access_chambre_manager,ChambreManager,model_reservation_chambre,reservation_group_manager,1,1,1,1
+access_classe_user,ClasseUser,model_reservation_classe,reservation_group_user,1,0,0,0
+access_classe_manager,ClasseManager,model_reservation_classe,reservation_group_manager,1,1,1,1
+access_client_user,ClientUser,model_reservation_client,reservation_group_user,1,0,0,0
+access_client_manager,ClientManager,model_reservation_client,reservation_group_manager,1,1,1,1
+access_consommation_user,ConsommationUser,model_reservation_consommation,reservation_group_user,1,0,0,0
+access_consommation_manager,ConsommationManager,model_reservation_consommation,reservation_group_manager,1,1,1,1
+access_hotel_user,HotelUser,model_reservation_hotel,reservation_group_user,1,0,0,0
+access_hotel_manager,HotelManager,model_reservation_hotel,reservation_group_manager,1,1,1,1
+access_prestation_user,PrestationUser,model_reservation_prestation,reservation_group_user,1,0,0,0
+access_prestation_manager,PrestationManager,model_reservation_prestation,reservation_group_manager,1,1,1,1
+access_reservation_user,ReservationUser,model_reservation_reservation,reservation_group_user,1,0,0,0
+access_reservation_manager,ReservationManager,model_reservation_reservation,reservation_group_manager,1,1,1,1

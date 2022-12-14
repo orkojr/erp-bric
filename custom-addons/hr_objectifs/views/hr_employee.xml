@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_employee_objectif_inherit">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                        <button name="%(hr_objectifs.employee_objectif_action)d"
+                            type="action"
+                            class="oe_stat_button"
+                            context="{'default_employee_id': active_id}"
+                            icon="fa-dropbox" string="Objectifs">
+                        </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_employee_public_objectif_inherit">
+            <field name="name">hr.employee.public.form</field>
+            <field name="model">hr.employee.public</field>
+            <field name="inherit_id" ref="hr.hr_employee_public_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <!-- <div class="oe_button_box" name="button_box"> -->
+                        <button name="%(hr_objectifs.employee_objectif_action)d"
+                            type="action"
+                            class="oe_stat_button"
+                            context="{'default_employee_id': active_id}"
+                            icon="fa-dropbox" string="Objectifs">
+                        </button>
+                    <!-- </div> -->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

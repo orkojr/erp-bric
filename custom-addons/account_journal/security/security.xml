@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="module_rapport_production" model="ir.module.category">
+        <field name="name">Suivi EPI</field>
+    </record>
+
+     <!-- Groupe Validation -->
+     <record id="acces_validation_group" model="res.groups">
+        <field name="name">Validation</field>
+        <field name="category_id" ref="module_rapport_production" />
+    </record>
+
+
+     <!-- Groupe Suppression -->
+     <record id="acces_suppression_group" model="res.groups">
+        <field name="name">Suppression</field>
+        <field name="category_id" ref="module_rapport_production" />
+    </record>
+
+
+     <!-- Groupe des Utilisatuers -->
+     <record id="access_update_groupe" model="res.groups">
+        <field name="name">Modification</field>
+        <field name="category_id" ref="module_rapport_production" />
+    </record>
+
+    <!-- Groupe des Manageurs -->
+    <record id="access_create_group" model="res.groups">
+        <field name="name">Creation</field>
+        <field name="category_id" ref="module_rapport_production" />
+    </record>
+
+
+
+
+</odoo>

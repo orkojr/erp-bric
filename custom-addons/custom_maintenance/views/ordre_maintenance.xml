@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="maintenace_request_inherit" model="ir.ui.view">
+        <field name="name">maintenance.request.inherit</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page name="pieces" string="Pièces Changées/Réparées">
+                        <field name="line_request_ids" >
+                            <tree string="Pieces"  editable="bottom">
+                                <field name="product_id" required="True" domain="[('product_tmpl_id.categ_id.name', '=', 'Pièces de rechange')]"/>
+                                <field name="quantite_piece" />
+                                <field name="prix_unitaire" />
+                                <field name="cout"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="infos_maintenance" string="Informations Supplementaires">
+                        <group>
+                            <group>
+                                <field name="causes" />
+                                <field name="main_doeuvre" />
+                                <field name="bon_commande_id" widget="selection"/>
+                            </group>
+                            <group col='4'>
+                                <field name="observations" />
+                            </group>
+                        </group>
+                    </page>
+                    <page name="point_controle" string="Points de contrôle" attrs="{'invisible':[('maintenance_type', '!=', 'preventive')]}">
+                        <field name="chekpoint_ids" >
+                            <tree editable='bottom'>
+                                <field name="checkpoint_id"  options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"  />
+                                <field name="fait" />
+                                <field name="pas_fait" />
+                                <field name="autre" />
+                                <field name="observation" />
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+            <xpath expr="//field[@name='maintenance_type']" position="after">
+                <field name="executant_id"  />
+                <field name="cout_total" widget="monetary" decoration-bf="1" optional="show"/>
+                <field name="debut" />
+                <field name="mise_en_marche" />
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

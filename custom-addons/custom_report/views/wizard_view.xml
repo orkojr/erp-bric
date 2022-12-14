@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record model='ir.ui.view' id='wizard_form'>
+            <field name="name">report.stock.history.form</field>
+            <field name="model">report.stock.history</field>
+            <field name="arch" type="xml">
+                <form string="Wizard">
+                        <group string="Entrepôts">
+                            <field name="warehouse" widget="many2many_tags" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}"/>
+                        </group>
+                        <group string="Période">
+                            <field name="select_period" />
+                        </group>
+                        <group string="Dates" attrs="{'invisible':[('select_period', '!=', 'periode')]}" >
+                            <field name="date_between" />
+                            <field name="date_end" />
+                        </group>
+                        <notebook>
+                            <page string="Catégorie">
+                                <field name="category" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}">
+                                    <tree>
+                                        <field name="name" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    <footer>
+                        <button name="export_xls" type="object" default_focus="1"
+                                string="Imprimer le rapport" class="oe_highlight"
+                                context="{'xls_export':1}" icon="fa-download"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model='ir.actions.act_window' id='wizard_act'>
+            <field name="name">État de stock des produits finis</field>
+            <field name="res_model">report.stock.history</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem name="Etat de stocks des produits finis"
+                  parent="stock.menu_warehouse_report"
+                  id="export_excel"
+                  groups="access_create_group"
+                  action="wizard_act"
+                  sequence="3"/>
+
+        <menuitem id="stock.menu_warehouse_report" 
+            parent="stock.menu_stock_root" 
+            groups="access_create_group,stock.group_stock_manager,access_update_groupe"/>
+
+        <menuitem id="stock.menu_stock_config_settings" parent="stock.menu_stock_root"
+        sequence="100" groups="stock.group_stock_manager,access_create_group,access_update_groupe"/>
+                  
+    </data>
+
+</odoo>

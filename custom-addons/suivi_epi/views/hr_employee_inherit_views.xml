@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="hr_employee_inherit_1" model="ir.ui.view">
+        <field name="name">hr.employee.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_skills.hr_employee_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Liste EPI" name="suivi_epi">
+                    <field name="epi_ids" >
+                        <tree editable="bottom" >
+                            <field name="epi_id" options="{'no_quick_create': True, 'no_create_edit' : True,'no_open' : True}"/>
+                            <field name="epi_attributed" />
+                            <field name="date_attribution" attrs="{'invisible':[('epi_attributed', '!=', True)]}" />
+                            <field name="date_exp" attrs="{'invisible':[('epi_attributed', '!=', True)]}" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_res_users_inherit_1" model="ir.ui.view">
+        <field name="name">res.users.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="hr.res_users_view_form_profile"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='managers']" position="attributes">
+                <attribute name="groups">hr_recrutement_access.access_manager_group</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_employee_public_inherit_1" model="ir.ui.view">
+        <field name="name">hr.employee.public.view.form.inherit.resume.inherit</field>
+        <field name="model">hr.employee.public</field>
+        <field name="inherit_id" ref="hr_skills.hr_employee_public_view_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Liste EPI" name="suivi_epi">
+                    <field name="epi_ids" >
+                        <tree editable="bottom" >
+                            <field name="epi_id" options="{'no_quick_create': True, 'no_create_edit' : True,'no_open' : True,'no_create': True}"/>
+                            <field name="epi_attributed" />
+                            <field name="date_attribution" attrs="{'invisible':[('epi_attributed', '!=', True)]}" />
+                            <field name="date_exp" attrs="{'invisible':[('epi_attributed', '!=', True)]}" />
+                        </tree>
+                    </field>
+                </page>
+
+                <page name="personal_information" string="Informations Privee">
+                    <group>
+                        <group string="Contact privé">
+                            <field name="address_home_id1"
+                                options='{"always_reload": True, "highlight_first_line": True}'/>
+                            <field name="private_emaill" string="Email"/>
+                            <!-- <field name="phone" class="o_force_ltr" groups="hr.group_hr_user" string="Phone" readonly="True"/> -->
+                            <!-- <field name="lang" string="Language"/> -->
+                            <!-- <field name="bank_account_id" context="{'default_partner_id': address_home_id}"/> -->
+                            <label for="km_h_w"/>
+                            <div class="o_row" name="div_km_home_work">
+                                <field name="km_h_w"/>
+                                <span>Km</span>
+                            </div>
+
+                        </group>
+                        <group string="Citoyenneté">
+                            <field name="country_id1" options='{"no_open": True, "no_create": True}'/>
+                            <field name="identification_id1" />
+                            <field name="passport_id1" />
+                            <field name="gender1"/>
+                            <field name="birthday1"/>
+                            <field name="place_of_birth1" />
+                            <field name="country_of_birth1"/>
+                        </group>
+                        <group string="État civil">
+                            <field name="marital1"/>
+                        </group>
+                        <group string="À charge">
+                            <field name="children1"/>
+                        </group>
+                        <group string="Urgence">
+                            <field name="emergency_contact1"/>
+                            <field name="emergency_phone1" class="o_force_ltr"/>
+                        </group>
+                        <!-- <group string="Work Permit" name="has_work_permit">
+                            <field name="visa_no"/>
+                            <field name="permit_no"/>
+                            <field name="visa_expire"/>
+                            <field name="work_permit_expiration_date"/>
+                            <field name="has_work_permit"/>
+                        </group>-->
+                        <group string="Éducation">
+                            <field name="certificate1"/>
+                            <field name="study_field1"/>
+                            <field name="study_school1"/>
+                        </group> 
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <!-- <menuitem id="hr_contract.hr_contract_history_view_list_action"
+                  parent="hr.menu_hr_root"
+                  name="Contrats"
+                  action="hr_contract.action_hr_contract"
+                  sequence="10"/> -->
+
+
+    <record id="hr_contract_history_view_list_action_1" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">hr.contract.history</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem
+        id="menu_hr_employee1"
+        name="Contrats"
+        action="hr_contract_history_view_list_action_1"
+        parent="hr.menu_hr_root"
+        sequence="6"/>
+
+</odoo>

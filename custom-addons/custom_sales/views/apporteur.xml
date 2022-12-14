@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+         <!-- vue liste -->
+        <record id="apporteur_view_tree" model="ir.ui.view">
+            <field name="name">sale.apporteur.view.tree</field>
+            <field name="model">sale.apporteur</field>
+            <field name="arch" type="xml">
+                <tree string="Apporteurs">
+                    <field name="partner_id" />
+                    <field name="commission" />
+                </tree>
+            </field>
+        </record>
+        <!-- vue Formulaire -->
+        <record id="apporteur_view_form" model="ir.ui.view">
+            <field name="name">sale.apporteur.view.form</field>
+            <field name="model">sale.apporteur</field>
+            <field name="arch" type="xml">
+                <form string="Apporteurs">
+                    <sheet>
+                        <group col='4'>
+                            <field name="partner_id" />
+                            <field name="commission" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Action a effectuer sur les vues -->
+        <record id="apporteur_action" model="ir.actions.act_window">
+            <field name="name">Apporteur</field>
+            <field name="res_model">sale.apporteur</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

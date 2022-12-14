@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="activite_xlsx_report_view" model="ir.ui.view">
+        <field name="name">suivi.activite.wizard</field>
+        <field name="model">suivi.activite.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Options">
+                <separator string="Suivi des activités l'entreprise"/>
+                <group string="Periode" >
+                    <group>
+                        <field name="date_deb" />
+                    </group>
+                    <group>
+                        <field name="date_fin" />
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_xlsx" string="Export suivi activites" type="object"
+                              default_focus="1" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_xlsx_activite" model="ir.actions.act_window">
+        <field name="name">Suivi activités</field>
+        <field name="res_model">suivi.activite.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="suivi_activite_excel_report" 
+        name="Suivi activite de l'entreprise"
+        parent="account.menu_finance_reports" 
+        action="action_xlsx_activite"/>
+</odoo>

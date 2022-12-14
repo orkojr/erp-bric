@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+         <!-- vue liste des epis -->
+        <record id="epi_view_tree" model="ir.ui.view">
+            <field name="name">epi.list.tree</field>
+            <field name="model">suivi.epi.epi</field>
+            <field name="arch" type="xml">
+                <tree string="Epi List">
+                    <field name="name" />
+                    <field name="duree" />
+                </tree>
+            </field>
+        </record>
+        <!-- vue Formulaire epi -->
+        <record id="epi_view_form" model="ir.ui.view">
+            <field name="name">epi.view.form</field>
+            <field name="model">suivi.epi.epi</field>
+            <field name="arch" type="xml">
+                <form string="EPI Form">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="duree" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Action a effectuer sur les vues -->
+        <record id="epi_action" model="ir.actions.act_window">
+            <field name="name">EPI</field>
+            <field name="res_model">suivi.epi.epi</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu principal -->
+            <menuitem
+                id="suivi_epi_epi_list"
+                name="Liste EPI"
+                action="epi_action"
+                parent="hr.menu_human_resources_configuration"
+                sequence="10"/>
+    
+    </data>
+    
+
+</odoo>

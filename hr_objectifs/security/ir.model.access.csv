@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_objectif_user,employee.objectif.user,model_employee_objectif,group_objectif_user,1,0,0,0
+access_employee_objectif_manager,employee.objectif.manager,model_employee_objectif,group_objectif_manager,1,1,1,1

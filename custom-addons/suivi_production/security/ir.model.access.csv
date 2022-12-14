@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_suivi_production_report_wizard_create,suivi.production.report.wizard,model_suivi_production_report_wizard,access_create_group,1,1,1,0
+access_suivi_production_report_wizard_update,suivi.production.report.wizard,model_suivi_production_report_wizard,access_update_groupe,1,1,0,0
+access_suivi_production_report_wizard_validation,suivi.production.report.wizard,model_suivi_production_report_wizard,acces_validation_group,1,1,0,0
+access_suivi_production_report_wizard_suppression,suivi.production.report.wizard,model_suivi_production_report_wizard,acces_suppression_group,1,0,0,1
+
+

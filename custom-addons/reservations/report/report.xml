@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="action_report_hotel_detail" model="ir.actions.report">
+        <field name="name">Hotel details</field>
+        <field name="model">reservation.hotel</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">reservations.report_hotel_id_detail</field>
+        <field name="report_file">reservations.report_hotel_id_detail</field>
+        <field name="binding_model_id" ref="model_reservation_hotel"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_reservation_classe" model="ir.actions.report">
+        <field name="name">Reservations Classe</field>
+        <field name="model">reservation.classe</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">reservations_report_classe</field>
+        <field name="report_file">reservations_report_classe</field>
+        <field name="binding_model_id" ref="model_reservation_classe"/>
+        <field name="binding_type">report</field>
+    </record>
+
+   
+
+</odoo>
