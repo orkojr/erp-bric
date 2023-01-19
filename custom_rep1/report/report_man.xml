@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="action_report_production_order" model="ir.actions.report">
+        <field name="name">Zone Report</field>
+        <field name="model">bric11.zone</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">bric11.report.report_zone</field>
+        <field name="report_file">bric11.report.report_zone</field>
+        <field name="binding_model_id" ref="model_bric11_zone"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_suivi_achat,suivi.achat.report.wizard,suivi_achat.model_suivi_achat_report_wizard,purchase.group_purchase_manager,1,1,1,1
+
+

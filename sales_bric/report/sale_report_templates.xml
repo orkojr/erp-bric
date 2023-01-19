@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_salechargement_document">
+    <t t-call="web.external_layout">
+        <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+        
+        <t t-set="address">
+            <div t-field="doc.partner_id"
+                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+            <p t-if="doc.partner_id.vat"><t t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></p>
+        </t>
+        
+        <div class="page">
+            <div class="oe_structure"/>
+
+            <h2 class="mt16">
+                
+                
+                <strong>Ordre de chargement:</strong>
+                
+                <span t-field="doc.name"/>
+            </h2>
+
+            <div class="row mt32 mb32" id="informations">
+                <div t-if="doc.name" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Document Source:</strong>
+                    <p class="m-0" t-field="doc.name"/>
+                </div>
+                <div t-if="doc.date and doc.state not in ['draft','sent']" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Date:</strong>
+                    <p class="m-0" t-field="doc.date"/>
+                </div>
+                
+                
+                <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Vendeur:</strong>
+                    <p class="m-0" t-field="doc.user_id"/>
+                </div>
+            </div>
+
+            <!-- Is there a discount on at least one line? -->
+           
+
+            <table class="table table-sm o_main_table">
+                <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                <thead style="display: table-row-group">
+                    <tr>
+                        <th name="th_code" class="text-left">CODE</th>
+                        <th name="th_description" class="text-left">DESIGNATION</th>
+                        <th name="th_quantity" class="text-right">QUANTITE</th>
+                        <th name="th_note" class="text-right">OBSERVATIONS</th>
+                    </tr>
+                </thead>
+                <tbody class="sale_tbody">
+
+                    <t t-set="current_subtotal" t-value="0"/>
+
+                    <t t-foreach="doc.move_lines" t-as="line">
+
+                        
+
+                        <tr t-att-class="'bg-200 font-weight-bold o_line_section'">
+                            <td name="td_code">
+                                <span t-field="line.product_id.default_code"/>
+                                
+                            </td>
+                            <td name="td_name"><span t-field="line.name"/></td>
+                            <td name="td_quantity" class="text-right">
+                                <span t-field="line.product_qty"/>
+                                
+                            </td>
+                            <td name="td_note" class="text-right">
+                                <span t-field="line.note"/>
+                            </td>
+                            
+                        </tr>
+
+                        
+                    </t>
+                </tbody>
+            </table>
+  
+        </div>
+    </t>
+</template>
+
+
+<template id="report_saleorder_chargement">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="sales_bric.report_salechargement_document" t-lang="doc.partner_id.lang"/>
+        </t>
+    </t>
+</template>
+
+
+
+</odoo>

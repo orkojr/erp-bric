@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_cout_wizard,purchase.cout.wizard,purchase_cout.model_purchase_cout_wizard,purchase.group_purchase_manager,1,1,1,0
+access_purchase_approvisionnement_line,purchase.approvisionnement.line,purchase_cout.model_purchase_approvisionnement_line,purchase.group_purchase_manager,1,1,1,1
+access_purchase_approvisionnement,purchase.approvisionnement,purchase_cout.model_purchase_approvisionnement,purchase.group_purchase_manager,1,1,1,1

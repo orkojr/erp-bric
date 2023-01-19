@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="example_xlsx_report_view" model="ir.ui.view">
+        <field name="name">Livraison chantier</field>
+        <field name="model">chantier.xlsx.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Options">
+                <separator string="Excel Report"/>
+                <group col="4">
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <group string="Chantiers">
+                    <field name="project_id" widget="many2many_tags" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}"  />
+                </group>
+                <footer>
+                    <button name="print_xlsx" string="Export report" type="object"
+                              default_focus="1" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_xlsx_report" model="ir.actions.act_window">
+        <field name="name">Excel</field>
+        <field name="res_model">chantier.xlsx.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="chantier_excel_report" name="Livraison chantier"
+               parent="stock.menu_warehouse_report" action="action_xlsx_report"/>
+</odoo>

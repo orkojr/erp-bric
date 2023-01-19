@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="maintenance_piece_inherit" model="ir.ui.view">
+            <field name="name">maintenance.equipment.inherit</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="Pieces" string="Pieces">
+                        <field name="piece_ids" >
+                            <tree editable="bottom">
+                                <field name="piece_id"  options="{'no_quick_create':True, 'no_create_edit' : True, 'no_open': True}" 
+                                domain="[('product_tmpl_id.categ_id.name', '=', 'Pièces de rechange')]"
+                                />
+                                <field name="mise_en_marche"   />
+                                <field name="progress" widget="progressbar"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="mrp_production_inherit_duree" model="ir.ui.view">
+            <field name="name">mrp.production.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="equipment_id" />
+                        <label for="duree_production" string="Durée Production" attrs="{'invisible' : [('state', 'not in', ['progress', 'to_close', 'done'])], 'required' : [('state', '=', 'to_close')]}"/>
+                        <div name="duration_display" class="o_row no-gutters d-flex">
+                            <div class="o_row" attrs="{'invisible' : [('state', 'not in', ['progress', 'to_close', 'done'])], 'required' : [('state', '=', 'to_close')]}">
+                                <field name="duree_production" attrs="{'invisible' : [('state', 'not in', ['progress', 'to_close', 'done'])], 'required' : [('state', '=', 'to_close')]}" />
+                                <span>Heures</span>
+                            </div>
+                        </div>
+                </xpath>
+                
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_maintenance_piece_line_create,maintenance.piece.line,model_maintenance_piece_line,custom_maintenance.access_create_group,1,1,1,1

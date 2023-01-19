@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="action_report_ordre_chargement" model="ir.actions.report">
+        <field name="name">Ordre Chargement</field>
+        <field name="model">ordre.chargement</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ordre_de_chargement.report_ordre_chargement_id</field>
+        <field name="report_file">ordre_de_chargement.report_ordre_chargement_id</field>
+        <field name="binding_model_id" ref="model_ordre_chargement"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

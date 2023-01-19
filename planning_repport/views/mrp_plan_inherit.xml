@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="mrp_plan_inherit" model="ir.ui.view">
+        <field name="name">mrp.plan.inherit</field>
+        <field name="model">mrp.plan</field>
+        <field name="inherit_id" ref="mrp_plan.view_mrp_plan_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button class="oe_stat_button" type="object" name = "planning_repport" string="Print to  Excel" />
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Planning Mensuel" attrs="{'invisible': [('type', '!=', 'mois')]}">
+                    <field name="week_ids" >
+                        <tree>
+                            <field name="plan_id"  invisible="1" />
+                            <field name="debut_date"  />
+                            <field name="fin_date"  />
+                            <field name="production_id"/>
+							<button name="duplicate_line"  string="Dupliquer" icon="fa-clone" type="object" class="oe_highlight"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

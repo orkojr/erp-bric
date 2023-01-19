@@ -1,0 +1,20 @@
+{
+    'name': "Custom Report1",
+    'description': 'Report customiser',
+    'author': 'Jordan Kamga Wafo',
+    'depends': ['base',],
+    'category': 'sale',
+    'summary': """Custom Report""",
+    'maintainer': 'Jordan Kamga Wafo',
+    'compagny': 'Third',
+    'website':'http://www.third.cm',
+    'license' : 'LGPL-3',
+    'data': [
+        # 'security/custom_crm_security.xml',
+        # 'security/ir.model.access.csv',
+        'views/zone_view.xml',
+        'views/quartier_view.xml',
+        'views/client_view.xml',
+    ],
+    'application': True,
+}

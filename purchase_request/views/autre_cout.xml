@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- <record id="purchase_order_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="Couts" string="Autres couts">
+                    <field name="line_cout_ids" widget="section_and_note_one2many" mode="tree,kanban" >
+                        <tree string="Autres couts"  editable="bottom">
+                            <field name="product_id" domain="[('purchase_ok', '=', True)]"/>
+                            <field name="quantite_piece" />
+                            <field name="prix_unitaire" />
+                            <field name="cout"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            
+        </field>
+    </record> -->
+</odoo>

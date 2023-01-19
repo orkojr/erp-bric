@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="mail_activity_epi" model="mail.activity.type">
+        <field name="name">Mise a jour des EPI</field>
+        <field name="icon">fa-users</field>
+        <field name="res_model">hr.employee</field>
+        <field name="sequence">9</field>
+    </record>
+</odoo>

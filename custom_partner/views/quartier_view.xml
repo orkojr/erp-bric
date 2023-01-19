@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+         <!-- vue liste des quartiers -->
+        <record id="quartier_view_tree" model="ir.ui.view">
+            <field name="name">quartier.list.tree</field>
+            <field name="model">bric1.quartier</field>
+            <field name="arch" type="xml">
+                <tree string="quartier List">
+                    <field name="appelation" />
+                </tree>
+            </field>
+        </record>
+        <!-- vue Formulaire quartier -->
+        <record id="quartier_view_form" model="ir.ui.view">
+            <field name="name">quartier.view.form</field>
+            <field name="model">bric1.quartier</field>
+            <field name="arch" type="xml">
+                <form string="quartier Form">
+                    <sheet>
+                        <group>
+                            <field name="appelation" />
+                            <!-- <field name="zone_id" /> -->
+                        </group>
+                        <!-- <notebook>
+                            <page  string="Liste des clients">
+                                <field name="client_ids" />
+                            </page>
+                            <page  string="List of Chambres">
+                                <field name="chambre_ids" />
+                            </page>
+                        </notebook> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Action a effectuer sur les vues -->
+        <record id="quartier_action" model="ir.actions.act_window">
+            <field name="name">Quartiers</field>
+            <field name="res_model">bric1.quartier</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu principal -->
+        <!-- <menuitem
+            id="bric1_menu_root"
+            name="Custom CRM"
+            sequence="10"/> -->
+            <!-- Menu quartier -->
+        <!-- <menuitem
+            id="bric1_quartier_cat"
+            name="Quartiers"
+            parent="bric1_menu_root"
+            sequence="10"/> -->
+            <!-- Menu actions -->
+            <!-- <menuitem
+                id="bric1_quartier_list"
+                name="List of Quartiers"
+                action="quartier_action"
+                parent="bric1_quartier_cat"
+                sequence="10"/>
+     -->
+    </data>
+    
+
+</odoo>

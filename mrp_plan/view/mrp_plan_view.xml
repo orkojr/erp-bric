@@ -1,0 +1,700 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<record id="view_mrp_plan_tree" model="ir.ui.view">
+		<field name="name">mrp.plan.tree</field>
+		<field name="model">mrp.plan</field>
+		<field name="priority">2</field>
+		<field name="arch" type="xml">
+			<tree string="MRP Plan" decoration-success="state=='approve'" decoration-muted="state=='cancel'">
+				<field name="name"/>
+				<!-- <field name="location_dest_id"/> -->
+				<field name="product_id"/>
+				<field name="plan_date"/>
+				<field name="production_date"/>
+				<field name="plan_qty"/>
+				<field name="uom_id"/>
+				<field name="bom_id"/>
+				<field name="user_id"/>
+				<field name="production_id"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+	<record id="view_mrp_plan_form" model="ir.ui.view">
+		<field name="name">mrp.plan.form</field>
+		<field name="model">mrp.plan</field>
+		<field name="arch" type="xml">
+			<form string="MRP Plan">
+				<header>
+					
+					<button name="approve" string="Approve" type="object" attrs="{'invisible':[('state','in',('approve','cancel'))]}" groups="mrp_plan.group_mrp_plan_manager"/>
+				 	<button name="cancel" string="Cancel" type="object" attrs="{'invisible':[('state','in',('cancel','approve'))]}" groups="mrp_plan.group_mrp_plan_manager"/>
+	                <field name="state" widget="statusbar"/>
+				</header>	
+				<sheet>
+					<div class="oe_button_box" name="button_box">
+                    	<button name="manufacture_order" icon="fa-linode" class="oe_stat_button" string="Manufacture" type="object" attrs="{'invisible':[('production_id','=',False)]}" />
+                    </div>
+					 <h1 class="hidden-xs">
+                        <field name="name" readonly="1"/>
+                    </h1>
+					<group>
+						<group>
+							<!-- <field name="location_dest_id" attrs="{'readonly':[('state','=','approve')]}"/> -->
+							
+							<field name="product_id" attrs="{'readonly':[('state','=','approve')]}" invisible="1"/>
+							<field name="plan_date" attrs="{'readonly':[('state','=','approve')]}"/>
+							<field name="type" attrs="{'readonly':[('state','=','approve')]}"/>
+							<label for="production_date" string="Periode du"/>
+							
+							<div name="production_date" class="d-flex">
+								
+								
+								<field name="production_date" attrs="{'readonly':[('state','=','approve')]}" required="1"/>
+								<span class="oe_inline">au  </span>
+								<span class="oe_inline">  </span>
+								<field name="production_date_fin" attrs="{'readonly':[('state','=','approve')]}" required="1"/>
+							</div>
+							<!-- <label for="plan_qty"/>
+                            <div class="o_row">
+                                <field name="plan_qty" attrs="{'readonly':[('state','=','approve')]}" required="1"/>
+                                <field name="uom_id" options="{'no_open':True,'no_create':True}" attrs="{'readonly':[('state','=','approve')]}" required="1"/>
+                            </div> -->
+							<field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}" force_save="1"/>
+						</group>
+						
+						<group>
+							<field name="bom_id" attrs="{'readonly':[('state','=','approve')]}" invisible="1"/>
+							<field name="user_id" attrs="{'readonly':[('state','=','approve')]}"/>
+							<field name="progress" widget="progressbar" style="background-color: #3b9ed1"/>
+							<field name="production_id" invisible="1"/>
+							
+						</group>
+						<!-- <group>
+							<span class='font-weight-bold'>Planifier</span>
+							<button type="object" name="action_production_forecast" icon="fa-area-chart"/>
+						</group> -->
+					</group>
+					<notebook>
+						
+						<!-- <page string="Components" name="components">
+							<field name="move_raw_plan_ids"
+                                context="{'default_state': 'draft', 'default_raw_material_production_plan_id': id}"
+                                >
+                                <tree default_order="is_done,sequence" editable="bottom">
+									<field name="product_id" force_save="1" required="1" context="{'default_detailed_type': 'product'}"/>
+                                    <field name="product_uom_qty" widget="mrp_should_consume" force_save="1" string="To Consume" width="1"/>
+                                    <field name="product_uom" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom"/>
+                                   
+								</tree>
+								<field name="company_id" invisible="1"/>
+							</field>
+						</page> -->
+						<page string="Planification hebdomadaire" name="components" invisible="1" >
+							<field name="line_plan_ids">
+                                <tree>
+									<field name="name"/>
+									<field name="production_order_id"/>
+									<field name="product_id"/>
+									<field name="product_uom_qty" string ="Quantite"/>
+                                    <field name="product_uom_id" required="1"/>
+									
+									
+									<field name="production_plan_line_id" invisible="1"/>
+								</tree>
+								
+								
+							</field>
+						</page>
+
+						<page string="Planning Journalier" attrs="{'invisible': [('type', '=', 'mois')]}" name="components">
+							<field name="plan_raw_ids">
+                                <tree>
+									
+									<field name="message_needaction" invisible="1"/>
+									<field name="name" decoration-bf="1"/>
+									<field name="jour" decoration-bf="1"/>
+									<field name="date_planned_start" readonly="1" optional="show"/>
+									<field name="date_deadline" widget="remaining_days" attrs="{'invisible': [('state', 'in', ['done', 'cancel'])]}" optional="hide"/>
+									<field name="product_id" readonly="1" optional="show"/>
+									<field name="lot_producing_id" optional="hide"/>
+									<field name="bom_id" readonly="1" optional="hide"/>
+									<field name="request_id" decoration-bf="1"/>
+									<field name="activity_ids" string="Next Activity" widget="list_activity" optional="hide" nolabel="1"/>
+									<field name="origin" optional="hide"/>
+									<field name="user_id" optional="hide" widget="many2one_avatar_user"/>
+									<field name="components_availability_state" invisible="1" options='{"lazy": true}'/>
+									<field name="components_availability" options='{"lazy": true}'
+										attrs="{'invisible': [('state', 'not in', ['confirmed', 'progress'])]}"
+										optional="hide"
+										decoration-success="reservation_state == 'assigned' or components_availability_state == 'available'"
+										decoration-warning="reservation_state != 'assigned' and components_availability_state in ('expected', 'available')"
+										decoration-danger="reservation_state != 'assigned' and components_availability_state == 'late'"/>
+									<field name="reservation_state" optional="hide" decoration-danger="reservation_state == 'confirmed'" decoration-success="reservation_state == 'assigned'"/>
+									<field name="product_qty" sum="Total Qty" string="Quantity" readonly="1" optional="show"/>
+									<field name="product_uom_id" string="UoM" options="{'no_open':True,'no_create':True}" groups="uom.group_uom" optional="show"/>
+									<field name="production_duration_expected" attrs="{'invisible': [('production_duration_expected', '=', 0)]}" groups="mrp.group_mrp_routings" widget="float_time" sum="Total expected duration" optional="hide"/>
+									<field name="production_real_duration" attrs="{'invisible': [('production_real_duration', '=', 0)]}" groups="mrp.group_mrp_routings" widget="float_time" sum="Total real duration" optional="hide"/>
+									<field name="company_id" readonly="1" groups="base.group_multi_company" optional="show"/>
+									<field name="state" 
+										decoration-success="state in ('done', 'to_close')"
+										decoration-warning="state == 'progress'"
+										decoration-info="state in ('confirmed', 'draft')"
+										optional="show" widget="badge"/>
+										<button name="duplicate_line"  string="Dupliquer" icon="fa-clone" type="object" class="oe_highlight"/>
+									<field name="activity_exception_decoration" widget="activity_exception" invisible="1"/>
+									<field name="delay_alert_date" invisible="1"/>
+									<field nolabel="1" name="json_popover" invisible="1" widget="stock_rescheduling_popover" attrs="{'invisible': [('json_popover', '=', False)]}"/>
+									<field name="plan_production_id" invisible="1"/>
+								</tree>
+								<form string="Manufacturing Orders">
+									<header>
+										<field name="confirm_cancel" invisible="1"/>
+										<field name="show_lock" invisible="1"/>
+										<button name="button_mark_done" attrs="{'invisible': ['|', '|', ('state', 'in', ('draft', 'cancel', 'done', 'to_close')), ('qty_producing', '=', 0), ('move_raw_ids', '!=', [])]}" string="Validate" type="object" class="oe_highlight"
+												confirm="There are no components to consume. Are you still sure you want to continue?" data-hotkey="g"/>
+										<button name="button_mark_done" attrs="{'invisible': ['|', '|', ('state', 'in', ('draft', 'cancel', 'done', 'to_close')), ('qty_producing', '=', 0), ('move_raw_ids', '=', [])]}" string="Validate" type="object" class="oe_highlight" data-hotkey="g"/>
+										<button name="button_mark_done" attrs="{'invisible': [
+											'|',
+											('move_raw_ids', '=', []),
+											'&amp;',
+											'|',
+											('state', 'not in', ('confirmed', 'progress')),
+											('qty_producing', '!=', 0),
+											('state', '!=', 'to_close')]}" string="Mark as Done" type="object" class="oe_highlight" data-hotkey="g"/>
+										<button name="button_mark_done" attrs="{'invisible': [
+											'|',
+											('move_raw_ids', '!=', []),
+											'&amp;',
+											'|',
+											('state', 'not in', ('confirmed', 'progress')),
+											('qty_producing', '!=', 0),
+											('state', '!=', 'to_close')]}" string="Mark as Done" type="object" class="oe_highlight" data-hotkey="g"
+												confirm="There are no components to consume. Are you still sure you want to continue?"/>
+										<button name="action_confirm" attrs="{'invisible': [('state', '!=', 'draft')]}" string="Confirm" type="object" class="oe_highlight" data-hotkey="v"/>
+										<!-- <button name="button_plan" attrs="{'invisible': ['|', '|', ('state', 'not in', ('confirmed', 'progress', 'to_close')), ('is_planned', '=', True)]}" type="object" string="Plan" class="oe_highlight" data-hotkey="x"/>
+										<button name="button_unplan" type="object" string="Unplan" attrs="{'invisible': [('is_planned', '=', False)]}" data-hotkey="x"/> -->
+										<button name="action_assign" attrs="{'invisible': ['|', ('state', 'in', ('draft', 'done', 'cancel')), ('reserve_visible', '=', False)]}" string="Check availability" type="object" data-hotkey="q"/>
+										<button name="do_unreserve" type="object" string="Unreserve" attrs="{'invisible': [('unreserve_visible', '=', False)]}" data-hotkey="w"/>
+										<button name="button_scrap" type="object" string="Scrap" attrs="{'invisible': [('state', 'in', ('cancel', 'draft'))]}" data-hotkey="z"/>
+										<field name="state" widget="statusbar" statusbar_visible="draft,confirmed,progress,done"/>
+										<button name="action_toggle_is_locked" attrs="{'invisible': ['|', ('show_lock', '=', False), ('is_locked', '=', False)]}" string="Unlock" groups="mrp.group_mrp_manager" type="object" help="Unlock the manufacturing order to adjust what has been consumed or produced." data-hotkey="l"/>
+										<button name="action_toggle_is_locked" attrs="{'invisible': ['|', ('show_lock', '=', False), ('is_locked', '=', True)]}" string="Lock" groups="mrp.group_mrp_manager" type="object" help="Lock the manufacturing order to prevent changes to what has been consumed or produced." data-hotkey="l"/>
+										<field name="show_serial_mass_produce" invisible="1"/>
+										<button name="action_serial_mass_produce_wizard" attrs="{'invisible': [('show_serial_mass_produce', '=', False)]}" string="Mass Produce" type="object"/>
+										<button name="action_cancel" type="object" string="Cancel" data-hotkey="z"
+												attrs="{'invisible': ['|', '|', ('id', '=', False), ('state', 'in', ('done', 'cancel')), ('confirm_cancel', '=', True)]}"/>
+										<button name="action_cancel" type="object" string="Cancel" data-hotkey="z"
+												attrs="{'invisible': ['|', '|', ('id', '=', False), ('state', 'in', ('done', 'cancel')), ('confirm_cancel', '=', False)]}"
+												confirm="Some product moves have already been confirmed, this manufacturing order can't be completely cancelled. Are you still sure you want to process ?"/>
+										<button name="button_unbuild" type="object" string="Unbuild" attrs="{'invisible': [('state', '!=', 'done')]}" data-hotkey="shift+v"/>
+									</header>
+									<sheet>
+										<field name="reservation_state" invisible="1"/>
+										<field name="date_planned_finished" invisible="1"/>
+										<field name="is_locked" invisible="1"/>
+										<field name="qty_produced" invisible="1"/>
+										<field name="unreserve_visible" invisible="1"/>
+										<field name="reserve_visible" invisible="1"/>
+										<field name="consumption" invisible="1"/>
+										<field name="is_planned" invisible="1"/>
+										<div class="oe_button_box" name="button_box">
+											<button class="oe_stat_button" name="action_view_mrp_production_childs" type="object" icon="fa-wrench" attrs="{'invisible': [('mrp_production_child_count', '=', 0)]}">
+												<div class="o_field_widget o_stat_info">
+													<span class="o_stat_value"><field name="mrp_production_child_count"/></span>
+													<span class="o_stat_text">Child MO</span>
+												</div>
+											</button>
+											<button class="oe_stat_button" name="action_view_mrp_production_sources" type="object" icon="fa-wrench" attrs="{'invisible': [('mrp_production_source_count', '=', 0)]}">
+												<div class="o_field_widget o_stat_info">
+													<span class="o_stat_value"><field name="mrp_production_source_count"/></span>
+													<span class="o_stat_text">Source MO</span>
+												</div>
+											</button>
+											<button class="oe_stat_button" name="action_view_mrp_production_backorders" type="object" icon="fa-wrench" attrs="{'invisible': [('mrp_production_backorder_count', '&lt;', 2)]}">
+												<div class="o_field_widget o_stat_info">
+													<span class="o_stat_value"><field name="mrp_production_backorder_count"/></span>
+													<span class="o_stat_text">Backorders</span>
+												</div>
+											</button>
+											<button class="oe_stat_button" name="action_see_move_scrap" type="object" icon="fa-arrows-v" attrs="{'invisible': [('scrap_count', '=', 0)]}">
+												<div class="o_field_widget o_stat_info">
+													<span class="o_stat_value"><field name="scrap_count"/></span>
+													<span class="o_stat_text">Scraps</span>
+												</div>
+											</button>
+											<button type="object" name="action_view_mo_delivery" class="oe_stat_button" icon="fa-truck"  groups="base.group_user" attrs="{'invisible': [('delivery_count', '=', 0)]}">
+												<field name="delivery_count" widget="statinfo" string="Transfers"/>
+											</button>
+											<button name="%(stock.action_stock_report)d" icon="fa-arrow-up" class="oe_stat_button" string="Traceability" type="action" states="done" groups="stock.group_production_lot"/>
+											<button name="%(mrp.action_mrp_production_moves)d" type="action" string="Product Moves" class="oe_stat_button" icon="fa-exchange" attrs="{'invisible': [('state', 'not in', ('progress', 'done'))]}"/>
+										</div>
+										<div class="oe_title">
+											<h1>
+												<field name="priority" widget="priority" class="mr-3"/>
+												<field name="name" placeholder="Manufacturing Reference" nolabel="1"/>
+											</h1>
+										</div>
+										<group>
+											<group>
+												<field name="id" invisible="1"/>
+												<field name="use_create_components_lots" invisible="1"/>
+												<field name="show_lot_ids" invisible="1"/>
+												<field name="product_tracking" invisible="1"/>
+												<field name="product_id" context="{'default_detailed_type': 'product'}" attrs="{'readonly': [('state', '!=', 'draft')]}" default_focus="1"/>
+												<field name="product_tmpl_id" invisible="1"/>
+												<field name="forecasted_issue" invisible="1"/>
+												<field name="product_description_variants" attrs="{'invisible': [('product_description_variants', 'in', (False, ''))], 'readonly': [('state', '!=', 'draft')]}"/>
+												<label for="product_qty" string="Quantity"/>
+												<div class="o_row no-gutters d-flex">
+													<div attrs="{'invisible': [('state', '=', 'draft')]}" class="o_row">
+														<field name="qty_producing" class="text-left" attrs="{'readonly': ['|', ('state', '=', 'cancel'), '&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}"/>
+														/
+													</div>
+													<field name="product_qty" class="oe_inline text-left" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('state', 'not in', ('draft', 'done'))]}"/>
+													<button type="action" name="%(mrp.action_change_production_qty)d"
+														context="{'default_mo_id': id}" class="oe_link oe_inline" style="margin: 0px; padding: 0px;" attrs="{'invisible': ['|', ('state', 'in', ('draft', 'done','cancel')), ('id', '=', False)]}">
+														<field name="product_qty" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+													</button>
+													<label for="product_uom_id" string="" class="oe_inline"/>
+													<field name="product_uom_category_id" invisible="1"/>
+													<field name="product_uom_id" options="{'no_open': True, 'no_create': True}" force_save="1" groups="uom.group_uom" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+													<span class='font-weight-bold'>To Produce</span>
+													<button type="object" name="action_product_forecast_report" icon="fa-area-chart" attrs="{'invisible': [('forecasted_issue', '=', True)]}"/>
+													<button type="object" name="action_product_forecast_report" icon="fa-area-chart" attrs="{'invisible': [('forecasted_issue', '=', False)]}" class="text-danger"/>
+												</div>
+												<label for="lot_producing_id" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('product_tracking', 'in', ('none', False))]}"/>
+												<div class="o_row" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('product_tracking', 'in', ('none', False))]}">
+													<field name="lot_producing_id"
+														context="{'default_product_id': product_id, 'default_company_id': company_id}" attrs="{'invisible': [('product_tracking', 'in', ('none', False))]}"/>
+													<button name="action_generate_serial" type="object" class="btn btn-primary fa fa-plus-square-o" aria-label="Creates a new serial/lot number" title="Creates a new serial/lot number" role="img" attrs="{'invisible': ['|', ('product_tracking', 'in', ('none', False)), ('lot_producing_id', '!=', False)]}"/>
+												</div>
+												<field name="bom_id"
+													context="{'default_product_tmpl_id': product_tmpl_id}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+											</group>
+											<group name="group_extra_info">
+												<label for="date_planned_start"/>
+												<div class="o_row">
+													<field name="date_planned_start"
+														attrs="{'readonly': [('state', 'in', ['close', 'cancel'])]}"
+														decoration-warning="state not in ('done', 'cancel') and date_planned_start &lt; now"
+														decoration-danger="state not in ('done', 'cancel') and date_planned_start &lt; current_date"
+														decoration-bf="state not in ('done', 'cancel') and (date_planned_start &lt; current_date or date_planned_start &lt; now)"/>
+													<field name="delay_alert_date" invisible="1"/>
+													<field nolabel="1" name="json_popover" widget="stock_rescheduling_popover" attrs="{'invisible': [('json_popover', '=', False)]}"/>
+												</div>
+												<field name="components_availability_state" invisible="1"/>
+												<field name="components_availability" attrs="{'invisible': [('state', 'not in', ['confirmed', 'progress'])]}"
+													decoration-success="reservation_state == 'assigned' or components_availability_state == 'available'"
+													decoration-warning="reservation_state != 'assigned' and components_availability_state in ('expected', 'available')"
+													decoration-danger="reservation_state != 'assigned' and components_availability_state == 'late'"/>
+												<field name="user_id" domain="[('share', '=', False)]"/>
+												<field name="jour" decoration-bf="1"/>
+												<field name="request_id" decoration-bf="1"/>
+												<field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}" force_save="1"/>
+												<field name="show_final_lots" invisible="1"/>
+												<field name="production_location_id" invisible="1" readonly="1"/>
+												<field name="move_finished_ids" invisible="1" attrs="{'readonly': ['|', ('state', '=', 'cancel'), '&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}">
+													<tree editable="bottom">
+														<field name="product_id"/>
+														<field name="product_uom_qty"/>
+														<field name="product_uom"/>
+														<field name="operation_id"/>
+														<field name="byproduct_id"/>
+														<field name="name"/>
+														<field name="date_deadline"/>
+														<field name="picking_type_id"/>
+														<field name="location_id"/>
+														<field name="location_dest_id"/>
+														<field name="company_id"/>
+														<field name="warehouse_id"/>
+														<field name="origin"/>
+														<field name="group_id"/>
+														<field name="propagate_cancel"/>
+														<field name="move_dest_ids"/>
+														<field name="state"/>
+														<!-- Useless as the editable in tree declaration -> For Form Test-->
+														<field name="product_uom_category_id"/>
+														<field name="allowed_operation_ids"/>
+													</tree>
+												</field>
+											</group>
+										</group>
+										<notebook>
+											<page string="Components" name="components">
+												<field name="move_raw_ids"
+													context="{'default_date': date_planned_start, 'default_state': 'draft', 'default_raw_material_production_id': id, 'default_company_id': company_id}"
+													attrs="{'readonly': ['|', ('state', '=', 'cancel'), '&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" options="{'delete': [('state', '=', 'draft')]}">
+													<tree default_order="is_done,sequence" editable="bottom">
+														<field name="product_id" force_save="1" required="1" context="{'default_detailed_type': 'product'}" attrs="{'readonly': ['|', '|', ('move_lines_count', '&gt;', 0), ('state', '=', 'cancel'), '&amp;', ('state', '!=', 'draft'), ('additional', '=', False) ]}"/>
+														<field name="location_id" string="From" readonly="1" groups="stock.group_stock_multi_locations" optional="show"/>
+														<field name="location_dest_id"/>
+														<field name="move_line_ids" invisible="1">
+															<tree>
+																<field name="lot_id" invisible="1"/>
+																<field name="owner_id" invisible="1"/>
+																<field name="package_id" invisible="1"/>
+																<field name="result_package_id" invisible="1"/>
+																<field name="location_id" invisible="1"/>
+																<field name="location_dest_id" invisible="1"/>
+																<field name="qty_done" invisible="1"/>
+																<field name="product_id" invisible="1"/>
+																<field name="product_uom_id" invisible="1"/>
+																<field name="product_uom_qty" invisible="1"/>
+																<field name="state" invisible="1"/>
+																<field name="move_id" invisible="1"/>
+																<field name="id" invisible="1"/>
+															</tree>
+														</field>
+														
+														<field name="propagate_cancel" invisible="1"/>
+														<field name="price_unit" invisible="1"/>
+														<field name="company_id" invisible="1"/>
+														<field name="product_uom_category_id" invisible="1"/>
+														<field name="name" invisible="1"/>
+														<field name="allowed_operation_ids" invisible="1"/>
+														<field name="unit_factor" invisible="1"/>
+														<field name="date_deadline" invisible="1" force_save="1"/>
+														<field name="date" invisible="1"/>
+														<field name="additional" invisible="1"/>
+														<field name="picking_type_id" invisible="1"/>
+														<field name="has_tracking" invisible="1"/>
+														<field name="operation_id" invisible="1"/>
+														<field name="is_done" invisible="1"/>
+														<field name="bom_line_id" invisible="1"/>
+														<field name="sequence" invisible="1"/>
+														
+														<field name="location_id" invisible="1"/>
+														<field name="warehouse_id" invisible="1"/>
+														<field name="is_locked" invisible="1"/>
+														<field name="move_lines_count" invisible="1"/>
+														<field name="state" invisible="1" force_save="1"/>
+														<field name="should_consume_qty" invisible="1"/>
+														<field name="product_uom_qty" widget="mrp_should_consume" force_save="1" string="To Consume" attrs="{'readonly': ['&amp;', ('parent.state', '!=', 'draft'), '|', '&amp;', ('parent.state', 'not in', ('confirmed', 'progress', 'to_close')), ('parent.is_planned', '!=', True), ('parent.is_locked', '=', True)]}" width="1"/>
+														<field name="product_uom" attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom"/>
+														<field name="product_type" invisible="1"/>
+														<field name="product_qty" invisible="1" readonly="1"/>
+														<field name="reserved_availability" invisible="1"/>
+														<field name="forecast_expected_date" invisible="1"/>
+														<!-- Button are used in state draft to doesn't have the name of the column "Reserved"-->
+														<button type="object" name="action_product_forecast_report" icon="fa-area-chart" attrs="{'column_invisible': [('parent.state', '!=', 'draft')], 'invisible': [('forecast_availability', '&lt;', 0)]}"/>
+														<button type="object" name="action_product_forecast_report" icon="fa-area-chart text-danger" attrs="{'column_invisible': [('parent.state', '!=', 'draft')], 'invisible': [('forecast_availability', '&gt;=', 0)]}"/>
+														<field name="forecast_availability" string="Reserved" attrs="{'column_invisible': [('parent.state', 'in', ('draft', 'done'))]}" widget="forecast_widget"/>
+														<field name="is_quantity_done_editable" invisible="1"/>
+														<field name="quantity_done" string="Consumed"
+															decoration-success="not is_done and (quantity_done - should_consume_qty == 0)"
+															decoration-warning="not is_done and (quantity_done - should_consume_qty &gt; 0.0001)"
+															attrs="{'column_invisible': [('parent.state', '=', 'draft')], 'readonly': [('has_tracking', '!=','none')]}"/>
+														<field name="show_details_visible" invisible="1"/>
+														<field name="lot_ids" widget="many2many_tags"
+															groups="stock.group_production_lot" optional="hide"
+															attrs="{'invisible': ['|', '|', ('show_details_visible', '=', False), ('has_tracking', '!=', 'serial'), ('parent.state', '=', 'draft')],
+																	'readonly': ['|', '|', ('show_details_visible', '=', False), ('has_tracking', '!=', 'serial'), ('parent.state', '=', 'draft')],
+																	'column_invisible': [('parent.show_lot_ids', '=',  False)]}"
+															options="{'create': [('parent.use_create_components_lots', '!=', False)]}"
+															context="{'default_company_id': company_id, 'default_product_id': product_id}"
+															domain="[('product_id','=',product_id)]"
+														/>
+														<field name="group_id" invisible="1"/>
+														<button name="action_show_details" type="object" icon="fa-list" context="{'default_product_uom_qty': 0}" attrs="{'invisible': ['|', ('show_details_visible', '=', False), ('has_tracking', '=','none')]}" options="{&quot;warn&quot;: true}"/>
+														<button class="o_optional_button" name="action_show_details" type="object" icon="fa-list" context="{'default_product_uom_qty': 0}" attrs="{'invisible': ['|', ('has_tracking', '!=','none'), ('show_details_visible', '=', False)]}" options="{&quot;warn&quot;: true}"/>
+													</tree>
+												</field>
+                        					</page>
+											<page string="Work Orders" name="operations" groups="mrp.group_mrp_routings">
+												<field name="workorder_ids" attrs="{'readonly': [('state', 'in', ['cancel', 'done'])]}" context="{'tree_view_ref': 'mrp.mrp_production_workorder_tree_editable_view', 'default_product_uom_id': product_uom_id}"/>
+											</page>
+											<page string="By-Products" name="finished_products" groups="mrp.group_mrp_byproducts">
+												<field name="move_byproduct_ids" context="{'default_date': date_planned_finished, 'default_date_deadline': date_deadline, 'default_location_id': production_location_id, 'default_location_dest_id': location_src_id, 'default_state': 'draft', 'default_production_id': id, 'default_picking_type_id': picking_type_id, 'default_company_id': company_id}" attrs="{'readonly': ['|', ('state', '=', 'cancel'), '&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" options="{'delete': [('state', '=', 'draft')]}">
+													<tree default_order="is_done,sequence" decoration-muted="is_done" editable="bottom">
+														<field name="byproduct_id" invisible="1"/>
+														<field name="product_id" context="{'default_detailed_type': 'product'}" domain="[('id', '!=', parent.product_id)]" required="1"/>
+														<field name="location_dest_id" string="To" readonly="1" groups="stock.group_stock_multi_locations"/>
+
+														<field name="move_line_ids" invisible="1">
+															<tree>
+																<field name="lot_id" invisible="1"/>
+																<field name="owner_id" invisible="1"/>
+																<field name="package_id" invisible="1"/>
+																<field name="result_package_id" invisible="1"/>
+																<field name="location_id" invisible="1"/>
+																<field name="location_dest_id" invisible="1"/>
+																<field name="qty_done" invisible="1"/>
+																<field name="product_id" invisible="1"/>
+																<field name="product_uom_id" invisible="1"/>
+																<field name="product_uom_qty" invisible="1"/>
+																<field name="state" invisible="1"/>
+																<field name="move_id" invisible="1"/>
+																<field name="id" invisible="1"/>
+															</tree>
+														</field>
+
+														<field name="company_id" invisible="1"/>
+														<field name="product_uom_category_id" invisible="1"/>
+														<field name="name" invisible="1"/>
+														<field name="allowed_operation_ids" invisible="1"/>
+														<field name="unit_factor" invisible="1"/>
+														<field name="date" invisible="1"/>
+														<field name="additional" invisible="1"/>
+														<field name="picking_type_id" invisible="1"/>
+														<field name="has_tracking" invisible="1"/>
+														<field name="operation_id" invisible="1"/>
+														<field name="is_done" invisible="1"/>
+														<field name="bom_line_id" invisible="1"/>
+														<field name="sequence" invisible="1"/>
+														<field name="location_id" invisible="1"/>
+														<field name="warehouse_id" invisible="1"/>
+														<field name="is_locked" invisible="1"/>
+														<field name="move_lines_count" invisible="1"/>
+														<field name="location_dest_id" domain="[('id', 'child_of', parent.location_dest_id)]" invisible="1"/>
+														<field name="state" invisible="1" force_save="1"/>
+														<field name="product_uom_qty" string="To Produce" force_save="1" attrs="{'readonly': ['&amp;', ('parent.state', '!=', 'draft'), '|', '&amp;', ('parent.state', 'not in', ('confirmed', 'progress', 'to_close')), ('parent.is_planned', '!=', True), ('parent.is_locked', '=', True)]}"/>
+														<field name="is_quantity_done_editable" invisible="1"/>
+														<field name="quantity_done" string="Produced" attrs="{'column_invisible': [('parent.state', '=', 'draft')], 'readonly': [('is_quantity_done_editable', '=', False)]}"/>
+														<field name="product_uom" groups="uom.group_uom"/>
+														<field name="cost_share" optional="hide"/>
+														<field name="show_details_visible" invisible="1"/>
+														<field name="lot_ids" widget="many2many_tags"
+															groups="stock.group_production_lot"
+															attrs="{'invisible': ['|', '|', ('show_details_visible', '=', False), ('has_tracking', '!=', 'serial'), ('parent.state', '=', 'draft')]}"
+															options="{'create': [('parent.use_create_components_lots', '!=', False)]}"
+															context="{'default_company_id': company_id, 'default_product_id': product_id}"
+															domain="[('product_id','=',product_id)]"
+														/>
+														<button name="action_show_details" type="object" icon="fa-list" attrs="{'invisible': ['|', ('has_tracking', '=','none'), ('show_details_visible', '=', False)]}" options="{&quot;warn&quot;: true}"/>
+														<button class="o_optional_button" name="action_show_details" type="object" icon="fa-list" attrs="{'invisible': ['|', ('has_tracking', '!=','none'), ('show_details_visible', '=', False)]}" options="{&quot;warn&quot;: true}"/>
+													</tree>
+												</field>
+											</page>
+											<page string="Divers" name="miscellaneous">
+												<group>
+													<group>
+														<field name="picking_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+														<field name="location_src_id" groups="stock.group_stock_multi_locations" options="{'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+														<field name="location_dest_id" groups="stock.group_stock_multi_locations" options="{'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+													</group>
+													<group>
+														<field name="origin"/>
+														<field name="date_deadline"
+															attrs="{'invisible': ['|', ('state', 'in', ('done', 'cancel')), ('date_deadline', '=', False)]}"
+															decoration-danger="date_deadline and date_deadline &lt; current_date"
+															decoration-bf="date_deadline and date_deadline &lt; current_date"/>
+														<field name="main_oeuvre_requise"/>
+														<field name="main_oeuvre_temporaire"/>
+														<field name="project1_id"/>
+													</group>
+
+												</group>
+											</page>
+											<page string="Allocation des ressources" name="task">
+												<field name="tache_raw_ids">
+													<tree editable="top">
+														<field name="name" />
+														<field name="employee_id" widget ="many2many_tags"/>
+														<field name="production_id" invisible="1"/>
+													</tree>
+												</field>
+											</page>
+										</notebook>
+										
+										<!-- <xpath expr="//footer" position="inside">
+											<button title="Dupliquer" string="Dupliquer" default_focus="1" class="oe_highlight"  name="duplicate" type="object" />
+										</xpath> -->
+									</sheet>
+								</form>	
+								<field name="company_id" invisible="1"/>
+							</field>
+						</page>
+
+					
+
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<!-- Kanban View -->
+
+	<record id="mrp_plan_kanban_view" model="ir.ui.view">
+		<field name="name">mrp.plan.kanban</field>
+		<field name="model">mrp.plan</field>
+		<field name="arch" type="xml">
+			<kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_plan_kanban">
+				<field name="name" />
+				<field name="product_id" />
+				<field name="plan_date" />
+				<field name="production_date" />
+				<field name="plan_qty" />
+				<field name="user_id" />
+				<field name="state"/>
+				<field name="color"/>
+				<field name="progress"/>
+				<field name="max_progress"/>
+				<templates>
+					<t t-name="kanban-box">
+						<div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
+							 <div t-attf-class="o_kanban_card_header">
+								<div class="o_kanban_card_header_title">
+									<div class="o_primary">
+										<h2>
+											<field name="name" />
+										</h2>
+									</div>
+									<div class="o_secondary">
+										<field class="o_secondary" name="product_id" />
+									</div>
+									<div class="o_kanban_manage_button_section">
+	                                    <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+	                                    <div style="background-color:#2b9a9d;float:right;color:black;padding:3px;border-radius:5px;font-size:9px">
+											<field name="state"/>
+										</div>
+	                                </div>
+								</div>
+								<div class="oe_kanban_details">
+									<div style="color:#adb5bd">
+										<field name="production_date" />
+									</div>
+									<div>
+										<div style="float:left;background-color:#9d2b7ad9;color:black;padding:3px;border-radius:15px;font-size:10px">
+											<field name='plan_qty'/>
+										</div>
+										<div style="float:right">
+											<field name='user_id'/>
+										</div>
+									</div>
+								</div> 
+								
+								<div>
+									<field name="progress" widget="gauge" options="{'max_field': 'max_progress'}"></field>
+								</div>
+							</div>
+							<div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+	                           <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+	                               <div class="col-8" role="menuitem" aria-haspopup="true">
+	                                   <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+	                               </div>
+	                           </div>
+	                        </div>
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+	
+	
+	<record id="action_mrp_plan_menu"
+		model="ir.actions.act_window">
+		<field name="name">MRP Plan</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">mrp.plan</field>
+		<!-- <field name="view_type">form</field> -->
+		<field name="view_mode">kanban,tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Click here to create a record
+			</p>
+		</field>
+	</record>
+
+
+		<menuitem id="menu_mrp_plan_view" name="Planning de production"
+		action="action_mrp_plan_menu" parent="mrp.menu_mrp_manufacturing"
+		sequence="0"/>
+		
+	<record id="action_stock_request_form1" model="ir.actions.act_window">
+        <field name="name">Stock Requests</field>
+        <field name="res_model">stock.request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="context">{
+            'search_default_current_requests': 1,
+            'pivot_column_groupby': ['location_id'], 'pivot_row_groupby': ['product_id'], 'pivot_measures': ['product_uom_qty', 'qty_done'],
+            'search_default_open': 1
+        }</field>
+        <field name="view_id" ref="stock_request.view_stock_request_tree" />
+        <field name="search_view_id" ref="stock_request.stock_request_search" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            Click to add a Stock Request.
+            </p>
+        </field>
+    </record>
+		<menuitem
+        id="stock_request_order_mrp_menu"
+        name="Requetes de stock"
+        parent="mrp.menu_mrp_root"
+        action="action_stock_request_form1"
+        groups="stock_request.group_stock_request_manager"
+        sequence="2"/>
+
+        <!-- Sequences for Checklist Main -->
+        <record id="seq_mrp_plan" model="ir.sequence">
+            <field name="name">MRP Plan</field>
+            <field name="code">mrp.plan</field>
+            <field name="prefix">MRP-PN</field>
+            <field name="padding">2</field>
+        </record>
+        
+        
+        <!-- MRP Production View -->
+        <record model="ir.ui.view" id="mrp_production_form_view_inherit_mrp_plan">
+			<field name="name">mrp_production_form_view_inherit_mrp_plan</field>
+			<field name="model">mrp.production</field>
+			<field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='date_planned_start']" position="before">
+					<field name="planned_id"/>
+					<field name="planned_date"/>
+					<field name="jour" invisible ="1"/>
+					<field name="request_id" invisible ="1"/>
+				</xpath>
+				<xpath expr="//field[@name='date_planned_start']" position="attributes">
+					<attribute name="string">Production Date</attribute>
+				</xpath>
+	        </field>
+		</record>
+
+		<!-- MRP Production View -->
+        <record model="ir.ui.view" id="project_form_view_inherit_project">
+			<field name="name">project_form_view_inherit_project</field>
+			<field name="model">project.project</field>
+			<field name="inherit_id" ref="project.edit_project"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='partner_id']" position="after">
+					<field name="type_interne"/>
+					
+				</xpath>
+				
+	        </field>
+		</record> 
+		<record model="ir.ui.view" id="project_form_view_inherit_task">
+			<field name="name">project_task_view_inherit_task</field>
+			<field name="model">project.task</field>
+			<field name="inherit_id" ref="project.view_task_form2"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='user_ids']" position="after">
+					<field name="employee_id"/>
+					
+				</xpath>
+				
+	        </field>
+		</record>
+        
+        <record model="ir.ui.view" id="product_template_approv_inherit">
+            <field name="name">product.template.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='min_quantity']" position="after">
+                    <field name="prod_capacity"  attrs="{'invisible':[('sale_ok', '!=', True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>	
+			
+			
+			
+			

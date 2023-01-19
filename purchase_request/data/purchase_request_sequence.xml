@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018-2019 ForgeFlow, S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo noupdate="1">
+    <record id="seq_purchase_request" model="ir.sequence">
+        <field name="name">Purchase Request</field>
+        <field name="code">purchase.request</field>
+        <field name="prefix">BA%(y)s%(month)s%(day)s</field>
+        <field name="padding">2</field>
+    </record>
+    <record id="seq_employe_request" model="ir.sequence">
+        <field name="name">Employe Request</field>
+        <field name="code">employe.request</field>
+        <field name="prefix">DI%(y)s%(month)s%(day)s</field>
+        <field name="padding">2</field>
+    </record>
+</odoo>

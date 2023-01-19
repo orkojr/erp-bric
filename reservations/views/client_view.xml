@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+         <!-- vue liste des clients -->
+        <record id="client_view_tree" model="ir.ui.view">
+            <field name="name">client.list.tree</field>
+            <field name="model">reservation.client</field>
+            <field name="arch" type="xml">
+                <tree string="Client List">
+                    <field name="code_cli" />
+                    <field name="l_name" />
+                    <field name="f_name" />
+                    <field name="adresse" />
+                    <field name="city" />
+                    <field name="phone" />
+                    <field name="email" />
+                    <field name="consommation_ids" />
+                    <field name="reservation_ids" />
+                </tree>
+            </field>
+        </record>
+        <!-- vue Formulaire Client -->
+        <record id="client_view_form" model="ir.ui.view">
+            <field name="name">client.view.form</field>
+            <field name="model">reservation.client</field>
+            <field name="arch" type="xml">
+                <form string="Client Form">
+                    <sheet>
+                        <group>
+                            <field name="code_cli" />
+                            <field name="l_name" />
+                            <field name="f_name" />
+                            <field name="adresse" />
+                            
+                        </group>
+                        <group>
+                            <field name="city" />
+                            <field name="cp" />
+                            <field name="country" />
+                            <field name="phone" />
+                            <field name="email" />
+                        </group>
+                        <notebook>
+                            <page  string="Consomations List">
+                                <field name="consommation_ids" />
+                            </page>
+                            <page  string="Reservations List">
+                                <field name="reservation_ids" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Action a effectuer sur les vues -->
+        <record id="client_action" model="ir.actions.act_window">
+            <field name="name">Clients</field>
+            <field name="res_model">reservation.client</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu principal -->
+        <menuitem
+            id="Reservation_menu_root"
+            name="Reservations"
+            sequence="10"/>
+            <!-- Menu categorie -->
+        <menuitem
+            id="reservation_client_cat"
+            name="Clients"
+            parent="Reservation_menu_root"
+            sequence="10"/>
+            <!-- Menu actions -->
+            <menuitem
+                id="reservation_client_list"
+                name="List of Clients"
+                action="client_action"
+                parent="reservation_client_cat"
+                sequence="10"/>
+    
+    </data>
+    
+
+</odoo>

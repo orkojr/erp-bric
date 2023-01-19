@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="hr_expense_view_form_inherit_payment" model="ir.ui.view">
+        <field name="name">hr.expense.view.form.inherit.payment</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_view_form" />
+        <field name="arch" type="xml">
+            
+            <xpath expr="//group/field[@name='date']" position="after">
+                <field name="post_depense"/>
+            </xpath>
+            <!-- <xpath expr="//header/field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,reported,approved,validation,done,refused"/>
+            </xpath> -->
+        </field>
+    </record>
+
+     <record id="hr_expense_sheet_form_view_inherit_tresorerie" model="ir.ui.view">
+        <field name="name">hr.expense.sheet.form.inherit.tresorerie</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expense_line_ids']/tree/field[@name='name']" position="after">
+                <field name="post_depense"/>
+                
+            </xpath>
+            <xpath expr="//header/field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,submit,approve,validation,post,done" force_save="1"/>
+            </xpath>
+
+            
+            <xpath expr="//button[@name='action_sheet_move_create']" position="attributes">
+                <attribute name="attrs">{'invisible' : [('state' , '!=', 'validation')]}</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_sheet_move_create']" position="after">
+                
+                
+                <button name="validation" class="oe_highlight" string="Valider" type="object" attrs="{'invisible' : [('state', '!=', 'approve')]}" help="Validation de la direction" groups="purchase_request.group_purchase_request_direction" />
+                
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="view_plan_mensuel_line_tree" model="ir.ui.view">
+		<field name="name">plan.mensuel.line.tree</field>
+		<field name="model">plan.mensuel.line</field>
+		<field name="priority">2</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="debut_date"  />
+                <field name="fin_date"  />
+                <field name="production_id" />
+			</tree>
+		</field>
+	</record>
+	<record id="view_plan_mensuel_line_form" model="ir.ui.view">
+		<field name="name">plan.mensuel.line.form</field>
+		<field name="model">plan.mensuel.line</field>
+		<field name="arch" type="xml">
+			<form string="Mensual Plan">
+				<sheet>
+					
+					<group>
+						<group>
+                            <field name="debut_date"  />
+                            <field name="fin_date"  />
+						</group>
+						<group>
+                            <field name="production_id" context="{'form_view_ref': 'planning_repport.mrp_production_inherit_mrp_plan'}"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="action_plan_mensuel_line"
+		model="ir.actions.act_window">
+		<field name="name">Mensual Plan</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">plan.mensuel.line</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Click here to create a record
+			</p>
+		</field>
+	</record>
+        
+</odoo>	
+			
+			
+			
+			

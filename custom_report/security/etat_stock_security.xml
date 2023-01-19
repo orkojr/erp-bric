@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="module_custom_report_category" model="ir.module.category">
+        <field name="name">Stock Report</field>
+    </record>
+
+     <!-- Groupe Validation
+     <record id="acces_read_group" model="res.groups">
+        <field name="name">Lecture</field>
+        <field name="category_id" ref="module_custom_report_category" />
+        <field name="implied_ids" eval="[(4,ref('base.user_root'))]" />
+        <field name="users" eval="[(4,ref('base.user_admin'))]" />
+    </record> -->
+
+     <!-- Groupe Validation -->
+     <record id="acces_validation_group" model="res.groups">
+        <field name="name">Validation</field>
+        <field name="category_id" ref="module_custom_report_category" />
+    </record>
+
+
+     <!-- Groupe Suppression -->
+     <record id="acces_suppression_group" model="res.groups">
+        <field name="name">Suppression</field>
+        <field name="category_id" ref="module_custom_report_category" />
+    </record>
+
+
+     <!-- Groupe des Utilisatuers -->
+     <record id="access_update_groupe" model="res.groups">
+        <field name="name">Modification</field>
+        <field name="category_id" ref="module_custom_report_category" />
+    </record>
+
+    <!-- Groupe des Manageurs -->
+    <record id="access_create_group" model="res.groups">
+        <field name="name">Creation</field>
+        <field name="category_id" ref="module_custom_report_category" />
+    </record>
+
+
+
+
+</odoo>

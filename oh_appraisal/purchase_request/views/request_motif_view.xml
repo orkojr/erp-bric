@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<odoo>
+	
+	<record id="view_request_motif_tree" model="ir.ui.view">
+		<field name="name">request.motif.tree</field>
+		<field name="model">request.motif</field>
+		<field name="priority">2</field>
+		<field name="arch" type="xml">
+			<tree string="Motif de la requete">
+				<field name="name"/>
+				
+				<field name="description"/>
+				
+				
+			</tree>
+		</field>
+	</record>
+	<record id="view_request_motif_form" model="ir.ui.view">
+		<field name="name">request.motif.form</field>
+		<field name="model">request.motif</field>
+		<field name="arch" type="xml">
+			<form string="Motif de la demande interne">
+				
+				<sheet>
+					
+					
+					<field name="name"/>
+					
+					<group>
+						<group>
+							
+							<field name="description"/>
+							
+						</group>
+					</group>
+		
+				</sheet>
+			</form>
+		</field>
+	</record>
+		
+	
+	<record id="action_request_motif_menu" model="ir.actions.act_window">
+		<field name="name">Motif de la demande interne</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">request.motif</field>
+		<!-- <field name="view_type">form</field> -->
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Click here to create a record
+			</p>
+		</field>
+	</record>
+	
+	
+	<record id="view_purchase_location_tree" model="ir.ui.view">
+		<field name="name">purchase.location.tree</field>
+		<field name="model">purchase.location</field>
+		<field name="priority">2</field>
+		<field name="arch" type="xml">
+			<tree string="Lieu d'achat">
+				<field name="name"/>
+				
+				<field name="description"/>
+				
+				
+			</tree>
+		</field>
+	</record>
+	<record id="view_purchase_location_form" model="ir.ui.view">
+		<field name="name">purchase.locationf.form</field>
+		<field name="model">purchase.location</field>
+		<field name="arch" type="xml">
+			<form string="Lieu d'achat">
+				
+				<sheet>
+					
+					
+					<field name="name"/>
+					
+					<group>
+						<group>
+							
+							<field name="description"/>
+							
+						</group>
+					</group>
+		
+				</sheet>
+			</form>
+		</field>
+	</record>
+		
+	
+	<record id="action_purchase_location_menu" model="ir.actions.act_window">
+		<field name="name">Lieu d'achat</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">purchase.location</field>
+		<!-- <field name="view_type">form</field> -->
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Click here to create a record
+			</p>
+		</field>
+	</record>
+
+	
+
+	
+   
+</odoo>	
+			
+			
+			
+			

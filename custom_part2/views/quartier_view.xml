@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+         <!-- vue liste des quartiers -->
+        <record id="quartier_view_tree" model="ir.ui.view">
+            <field name="name">quartier.list.tree</field>
+            <field name="model">bric1.quartier</field>
+            <field name="arch" type="xml">
+                <tree string="quartier List">
+                    <field name="appelation" />
+                </tree>
+            </field>
+        </record>
+        <!-- vue Formulaire quartier -->
+        <record id="quartier_view_form" model="ir.ui.view">
+            <field name="name">quartier.view.form</field>
+            <field name="model">bric1.quartier</field>
+            <field name="arch" type="xml">
+                <form string="quartier Form">
+                    <sheet>
+                        <group>
+                            <field name="appelation" />
+                            <field name="zone_id" invisible='1'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Action a effectuer sur les vues -->
+        <record id="quartier_action" model="ir.actions.act_window">
+            <field name="name">Quartiers</field>
+            <field name="res_model">bric1.quartier</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+    
+
+</odoo>

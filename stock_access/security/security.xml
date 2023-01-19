@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="module_sotck_access" model="ir.module.category">
+        <field name="name">Stock access</field>
+    </record>
+
+    <!-- Groupe Validation -->
+    <record id="access_write_group" model="res.groups">
+        <field name="name">Creation</field>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="category_id" ref="module_sotck_access" />
+    </record>
+
+    <record id="access_lecture_group" model="res.groups">
+        <field name="name">Lecture</field>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="category_id" ref="module_sotck_access" />
+    </record>
+
+    <record id="access_delete_group" model="res.groups">
+        <field name="name">Suppression</field>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="category_id" ref="module_sotck_access" />
+    </record>
+
+     
+     <!-- Groupe des Utilisatuers -->
+     <record id="access_update_groupe" model="res.groups">
+        <field name="name">Modification</field>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="category_id" ref="module_sotck_access" />
+    </record>
+    
+
+
+
+
+</odoo>

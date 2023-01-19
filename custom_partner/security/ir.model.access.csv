@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_zone_user,ZoneUser,model_bric_zone,bric_group_user,1,0,0,0
+access_zone_manager,ZoneManager,model_bric_zone,bric_group_manager,1,1,1,1
+access_client_user,ClientUser,model_bric_client,bric_group_user,1,0,0,0
+access_client_manager,ClientManager,model_bric_client,bric_group_manager,1,1,1,1
+access_quartier_user,QuartierUser,model_bric_quartier,bric_group_user,1,0,0,0
+access_quartier_manager,QuartierManager,model_bric_quartier,bric_group_manager,1,1,1,1

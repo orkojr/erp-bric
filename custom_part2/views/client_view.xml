@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="res_partner_inherit" model="ir.ui.view">
+        <field name="name">res.partner.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="zone_id" widget="selection"/>
+                <field name="type_contact" widget="radio" options="{'horizontal':True}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="res_partner_emp_inherit" model="ir.actions.act_window">
+        <field name="name">Employés</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('type_contact', '=', 'emp')]</field>
+    </record>
+
+    <record id="res_partner_fournisseur_inherit" model="ir.actions.act_window">
+        <field name="name">Fournisseurs</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('type_contact', '=', 'four')]</field>
+    </record>
+    <record id="res_partner_client_inherit" model="ir.actions.act_window">
+        <field name="name">Clients</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('type_contact', '=', 'client')]</field>
+    </record>
+    <menuitem
+        id="menu_contact_emp"
+        name="Employés"
+        action="res_partner_emp_inherit"
+        parent="contacts.menu_contacts"
+        sequence="0"/>
+
+    <menuitem
+        id="menu_contact_four"
+        name="Fournisseurs"
+        action="res_partner_fournisseur_inherit"
+        parent="contacts.menu_contacts"
+        groups="purchase.group_purchase_manager"
+        sequence="01"/>
+    <menuitem
+        id="menu_contact_client"
+        name="Clients"
+        action="res_partner_client_inherit"
+        parent="contacts.menu_contacts"
+        groups="sales_team.group_sale_manager,sales_team.group_sale_salesman"
+        sequence="1"/>
+
+</odoo>

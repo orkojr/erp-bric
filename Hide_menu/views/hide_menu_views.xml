@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<menuitem name="Ressources Humaines" id="menu_rh" sequence="0"/>
+<menuitem
+    id="hr.menu_hr_root"
+    name="Profils"
+    groups="group_hr_manager,group_hr_user,base.group_user"
+    web_icon="hr,static/description/icon.png"
+    sequence="1"
+    parent ="menu_rh"/>
+
+       
+    
+</odoo>

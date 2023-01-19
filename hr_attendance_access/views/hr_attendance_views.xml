@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    
+    <menuitem id="hr_attendance.menu_hr_attendance_root" name="Attendances" sequence="205" groups="hr_attendance_access.access_manager_group,hr_attendance_access.access_employee_group,hr_attendance_access.access_admin_group,hr_attendance_access.access_department_group" web_icon="hr_attendance,static/description/icon.png"/>
+
+    <menuitem id="hr_attendance.menu_hr_attendance_my_attendances" name="Check In / Check Out" parent="hr_attendance.menu_hr_attendance_root" sequence="1" groups="hr_attendance_access.access_manager_group" action="hr_attendance.hr_attendance_action_my_attendances"/>
+
+    <menuitem id="hr_attendance.menu_hr_attendance_attendances_overview" name="Attendances" parent="hr_attendance.menu_hr_attendance_root" sequence="1" groups="hr_attendance_access.access_manager_group" action="hr_attendance.hr_attendance_action_overview"/>
+
+    <menuitem id="hr_attendance.menu_hr_attendance_kiosk_no_user_mode" name="Kiosk Mode" parent="hr_attendance.menu_hr_attendance_root" sequence="10" groups="hr_attendance_access.access_department_group,hr_attendance_access.access_manager_group,hr_attendance_access.access_admin_group" action="hr_attendance.hr_attendance_action_kiosk_mode"/>
+
+    <menuitem id="hr_attendance.menu_hr_attendance_view_attendances" name="Attendances" parent="hr_attendance.menu_hr_attendance_root" sequence="10" groups="hr_attendance_access.access_employee_group" action="hr_attendance.hr_attendance_action"/>
+</odoo>

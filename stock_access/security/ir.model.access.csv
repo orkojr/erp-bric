@@ -1,0 +1,249 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+access_procurement_group,procurement.group,stock.model_procurement_group,stock_access.access_write_group,1,1,1,0
+access_stock_warehouse_user,stock.warehouse.user,stock.model_stock_warehouse,stock_access.access_write_group,1,1,1,0
+access_stock_location_user,stock.location.user,stock.model_stock_location,stock_access.access_write_group,1,1,1,0
+access_stock_picking_user,stock.picking user,stock.model_stock_picking,stock_access.access_write_group,1,1,1,1
+access_stock_picking_type_all,stock.picking.type all users,stock.model_stock_picking_type,stock_access.access_write_group,1,1,1,0
+access_stock_picking_type_user,stock.picking.type user,stock.model_stock_picking_type,stock_access.access_write_group,1,1,1,0
+access_stock_production_lot_user,stock.production.lot user,stock.model_stock_production_lot,stock_access.access_write_group,1,1,1,1
+access_stock_move_user,stock.move user,stock.model_stock_move,stock_access.access_write_group,1,1,1,0
+access_product_product_stock_user,product_product_stock_user,product.model_product_product,stock_access.access_write_group,1,1,1,0
+access_product_template_stock_user,product.template stock user,product.model_product_template,stock_access.access_write_group,1,1,1,0
+access_stock_warehouse_orderpoint,stock.warehouse.orderpoint,stock.model_stock_warehouse_orderpoint,stock_access.access_write_group,1,1,1,0
+access_stock_quant_user,stock.quant user,stock.model_stock_quant,stock_access.access_write_group,1,1,1,0
+access_stock_quant_all,stock.quant all users,stock.model_stock_quant,stock_access.access_write_group,1,1,1,0
+access_stock_quant_package_all,stock.quant.package all users,stock.model_stock_quant_package,stock_access.access_write_group,1,1,1,1
+access_stock_quant_package_stock_user,stock.quant.package stock user,stock.model_stock_quant_package,stock_access.access_write_group,1,1,1,1
+access_stock_package_level_all,stock.package_level all users,stock.model_stock_package_level,stock_access.access_write_group,1,1,1,0
+access_stock_package_level_stock_user,stock.package_level stock user,stock.model_stock_package_level,stock_access.access_write_group,1,1,1,1
+access_stock_rule_user,stock_rule user,stock.model_stock_rule,stock_access.access_write_group,1,1,1,0
+access_stock_location_route,stock.location.route,stock.model_stock_location_route,stock_access.access_write_group,1,1,1,0
+access_stock_rule_internal,stock.rule.flow internal,stock.model_stock_rule,stock_access.access_write_group,1,1,1,0
+access_stock_move_line_user,stock.move.line user,stock.model_stock_move_line,stock_access.access_write_group,1,1,1,1
+access_stock_move_line_all,stock.move.line all users,stock.model_stock_move_line,stock_access.access_write_group,1,1,1,1
+access_stock_putaway_all,stock.putaway.rule all users,stock.model_stock_putaway_rule,stock_access.access_write_group,1,1,1,0
+access_stock_removal_all,product.removal all users,stock.model_product_removal,stock_access.access_write_group,1,1,1,0
+access_barcode_nomenclature_stock_user,barcode.nomenclature.stock.user,barcodes.model_barcode_nomenclature,stock_access.access_write_group,1,1,1,0
+access_barcode_rule_stock_user,barcode.rule.stock.user,barcodes.model_barcode_rule,stock_access.access_write_group,1,1,1,0
+access_stock1_scrap_user,stock.scrap.user,stock.model_stock_scrap,stock_access.access_write_group,1,1,1,0
+access_report_stock_quantity,access_report_stock_quantity,stock.model_report_stock_quantity,stock_access.access_write_group,1,1,1,0
+access_stock_traceability_report,access.stock.traceability.report,stock.model_stock_traceability_report,stock_access.access_write_group,1,1,1,0
+access_stock_assign_serial,access.stock.assign.serial,stock.model_stock_assign_serial,stock_access.access_write_group,1,1,1,0
+access_stock_return_picking_line,access.stock.return.picking.line,stock.model_stock_return_picking_line,stock_access.access_write_group,1,1,1,1
+access_stock_return_picking,access.stock.return.picking,stock.model_stock_return_picking,stock_access.access_write_group,1,1,1,0
+access_stock_change_product_qty,access.stock.change.product.qty,stock.model_stock_change_product_qty,stock_access.access_write_group,1,1,1,0
+access_stock_scheduler_compute,access.stock.scheduler.compute,stock.model_stock_scheduler_compute,stock_access.access_write_group,1,1,1,0
+access_stock_immediate_transfer_line,access.stock.immediate.transfer.line,stock.model_stock_immediate_transfer_line,stock_access.access_write_group,1,1,1,0
+access_stock_immediate_transfer,access.stock.immediate.transfer,stock.model_stock_immediate_transfer,stock_access.access_write_group,1,1,1,0
+access_stock_backorder_confirmation_line,access.stock.backorder.confirmation.line,stock.model_stock_backorder_confirmation_line,stock_access.access_write_group,1,1,1,0
+access_stock_backorder_confirmation,access.stock.backorder.confirmation,stock.model_stock_backorder_confirmation,stock_access.access_write_group,1,1,1,0
+access_stock_quantity_history,access.stock.quantity.history,stock.model_stock_quantity_history,stock_access.access_write_group,1,1,1,0
+access_stock_rules_report,access.stock.rules.report,stock.model_stock_rules_report,stock_access.access_write_group,1,1,1,0
+access_stock_warn_insufficient_qty_scrap,access.stock.warn.insufficient.qty.scrap,stock.model_stock_warn_insufficient_qty_scrap,stock_access.access_write_group,1,1,1,0
+access_product_replenish,access.product.replenish,stock.model_product_replenish,stock_access.access_write_group,1,1,1,0
+access_stock_track_confirmation,access.stock.track.confirmation,stock.model_stock_track_confirmation,stock_access.access_write_group,1,1,1,0
+access_stock_track_line,access.stock.track.line,stock.model_stock_track_line,stock_access.access_write_group,1,1,1,0
+access_stock_package_destination,access.stock.package.destination,stock.model_stock_package_destination,stock_access.access_write_group,1,1,1,0
+access_stock_orderpoint_snooze,access_stock_orderpoint_snooze,stock.model_stock_orderpoint_snooze,stock_access.access_write_group,1,1,1,1
+access_stock_package_type_user,access_stock_package_type_user,stock.model_stock_package_type,stock_access.access_write_group,1,1,1,0
+access_stock_storage_category_user,stock.storage.category.user,stock.model_stock_storage_category,stock_access.access_write_group,1,1,1,0
+access_stock_storage_category_capacity_user,stock.storage.category.capacity.user,stock.model_stock_storage_category_capacity,stock_access.access_write_group,1,1,1,0
+access_mrp_plan_user,mrp.plan.user,mrp_plan.model_mrp_plan,stock_access.access_write_group,1,1,1,0
+access_mrp_production,mrp.production user,mrp.model_mrp_production,stock_access.access_write_group,1,1,1,0
+access_mrp_plan_manager,mrp.plan.manager,mrp_plan.model_mrp_plan,stock_access.access_write_group,1,1,1,0
+access_fleet_vehicle,fleet.vehicle,fleet.model_fleet_vehicle,stock_access.access_write_group,1,0,0,0
+access_uom_category,uom.category,point_of_sale.model_uom_category,stock_access.access_write_group,1,1,1,0
+access_uom_uom,uom.uom,point_of_sale.model_uom_uom,stock_access.access_write_group,1,1,1,0
+access_product_category,product.category,product.model_product_category,stock_access.access_write_group,1,1,1,0
+access_mrp_bom,mrp.bom,mrp.model_mrp_bom,stock_access.access_write_group,1,0,0,0
+access_mrp_production,mrp.production user,mrp.model_mrp_production,stock_access.access_write_group,1,1,0,0
+
+
+
+
+access_l_procurement_group,procurement.group,stock.model_procurement_group,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_warehouse_user,stock.warehouse.user,stock.model_stock_warehouse,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_location_user,stock.location.user,stock.model_stock_location,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_picking_user,stock.picking user,stock.model_stock_picking,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_picking_type_all,stock.picking.type all users,stock.model_stock_picking_type,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_picking_type_user,stock.picking.type user,stock.model_stock_picking_type,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_production_lot_user,stock.production.lot user,stock.model_stock_production_lot,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_move_user,stock.move user,stock.model_stock_move,stock_access.access_lecture_group,1,0,0,0
+access_l_product_product_stock_user,product_product_stock_user,product.model_product_product,stock_access.access_lecture_group,1,0,0,0
+access_l_product_template_stock_user,product.template stock user,product.model_product_template,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_warehouse_orderpoint,stock.warehouse.orderpoint,stock.model_stock_warehouse_orderpoint,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_quant_user,stock.quant user,stock.model_stock_quant,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_quant_all,stock.quant all users,stock.model_stock_quant,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_quant_package_all,stock.quant.package all users,stock.model_stock_quant_package,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_quant_package_stock_user,stock.quant.package stock user,stock.model_stock_quant_package,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_package_level_all,stock.package_level all users,stock.model_stock_package_level,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_package_level_stock_user,stock.package_level stock user,stock.model_stock_package_level,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_rule_user,stock_rule user,stock.model_stock_rule,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_location_route,stock.location.route,stock.model_stock_location_route,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_rule_internal,stock.rule.flow internal,stock.model_stock_rule,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_move_line_user,stock.move.line user,stock.model_stock_move_line,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_move_line_all,stock.move.line all users,stock.model_stock_move_line,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_putaway_all,stock.putaway.rule all users,stock.model_stock_putaway_rule,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_removal_all,product.removal all users,stock.model_product_removal,stock_access.access_lecture_group,1,0,0,0
+access_l_barcode_nomenclature_stock_user,barcode.nomenclature.stock.user,barcodes.model_barcode_nomenclature,stock_access.access_lecture_group,1,0,0,0
+access_l_barcode_rule_stock_user,barcode.rule.stock.user,barcodes.model_barcode_rule,stock_access.access_lecture_group,1,0,0,0
+access_l_stock1_scrap_user,stock.scrap.user,stock.model_stock_scrap,stock_access.access_lecture_group,1,0,0,0
+access_l_report_stock_quantity,access_report_stock_quantity,stock.model_report_stock_quantity,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_traceability_report,access.stock.traceability.report,stock.model_stock_traceability_report,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_assign_serial,access.stock.assign.serial,stock.model_stock_assign_serial,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_return_picking_line,access.stock.return.picking.line,stock.model_stock_return_picking_line,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_return_picking,access.stock.return.picking,stock.model_stock_return_picking,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_change_product_qty,access.stock.change.product.qty,stock.model_stock_change_product_qty,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_scheduler_compute,access.stock.scheduler.compute,stock.model_stock_scheduler_compute,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_immediate_transfer_line,access.stock.immediate.transfer.line,stock.model_stock_immediate_transfer_line,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_immediate_transfer,access.stock.immediate.transfer,stock.model_stock_immediate_transfer,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_backorder_confirmation_line,access.stock.backorder.confirmation.line,stock.model_stock_backorder_confirmation_line,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_backorder_confirmation,access.stock.backorder.confirmation,stock.model_stock_backorder_confirmation,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_quantity_history,access.stock.quantity.history,stock.model_stock_quantity_history,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_rules_report,access.stock.rules.report,stock.model_stock_rules_report,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_warn_insufficient_qty_scrap,access.stock.warn.insufficient.qty.scrap,stock.model_stock_warn_insufficient_qty_scrap,stock_access.access_lecture_group,1,0,0,0
+access_l_product_replenish,access.product.replenish,stock.model_product_replenish,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_track_confirmation,access.stock.track.confirmation,stock.model_stock_track_confirmation,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_track_line,access.stock.track.line,stock.model_stock_track_line,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_package_destination,access.stock.package.destination,stock.model_stock_package_destination,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_orderpoint_snooze,access_stock_orderpoint_snooze,stock.model_stock_orderpoint_snooze,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_package_type_user,access_stock_package_type_user,stock.model_stock_package_type,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_storage_category_user,stock.storage.category.user,stock.model_stock_storage_category,stock_access.access_lecture_group,1,0,0,0
+access_l_stock_storage_category_capacity_user,stock.storage.category.capacity.user,stock.model_stock_storage_category_capacity,stock_access.access_lecture_group,1,0,0,0
+access_l_mrp_plan_user,mrp.plan.user,mrp_plan.model_mrp_plan,stock_access.access_lecture_group,1,0,0,0
+access_l_mrp_production,mrp.production user,mrp.model_mrp_production,stock_access.access_lecture_group,1,0,0,0
+access_l_fleet_vehicle,fleet.vehicle,fleet.model_fleet_vehicle,stock_access.access_lecture_group,1,0,0,0
+access_l_mrp_plan_manager,mrp.plan.manager,mrp_plan.model_mrp_plan,stock_access.access_lecture_group,1,0,0,0
+access_l_uom_category,uom.category,point_of_sale.model_uom_category,stock_access.access_lecture_group,1,0,0,0
+access_l_uom_uom,uom.uom,point_of_sale.model_uom_uom,stock_access.access_lecture_group,1,0,0,0
+access_l_product_category,product.category,product.model_product_category,stock_access.access_lecture_group,1,0,0,0
+access_l_mrp_bom,mrp.bom,mrp.model_mrp_bom,stock_access.access_lecture_group,1,0,0,0
+access_l_mrp_production,mrp.production user,mrp.model_mrp_production,stock_access.access_lecture_group,1,1,0,0
+
+
+
+
+
+access_l1_procurement_group,procurement.group,stock.model_procurement_group,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_warehouse_user,stock.warehouse.user,stock.model_stock_warehouse,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_location_user,stock.location.user,stock.model_stock_location,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_picking_user,stock.picking user,stock.model_stock_picking,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_picking_type_all,stock.picking.type all users,stock.model_stock_picking_type,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_picking_type_user,stock.picking.type user,stock.model_stock_picking_type,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_production_lot_user,stock.production.lot user,stock.model_stock_production_lot,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_move_user,stock.move user,stock.model_stock_move,stock_access.access_delete_group,1,0,0,1
+access_l1_product_product_stock_user,product_product_stock_user,product.model_product_product,stock_access.access_delete_group,1,0,0,1
+access_l1_product_template_stock_user,product.template stock user,product.model_product_template,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_warehouse_orderpoint,stock.warehouse.orderpoint,stock.model_stock_warehouse_orderpoint,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_quant_user,stock.quant user,stock.model_stock_quant,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_quant_all,stock.quant all users,stock.model_stock_quant,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_quant_package_all,stock.quant.package all users,stock.model_stock_quant_package,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_quant_package_stock_user,stock.quant.package stock user,stock.model_stock_quant_package,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_package_level_all,stock.package_level all users,stock.model_stock_package_level,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_package_level_stock_user,stock.package_level stock user,stock.model_stock_package_level,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_rule_user,stock_rule user,stock.model_stock_rule,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_location_route,stock.location.route,stock.model_stock_location_route,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_rule_internal,stock.rule.flow internal,stock.model_stock_rule,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_move_line_user,stock.move.line user,stock.model_stock_move_line,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_move_line_all,stock.move.line all users,stock.model_stock_move_line,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_putaway_all,stock.putaway.rule all users,stock.model_stock_putaway_rule,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_removal_all,product.removal all users,stock.model_product_removal,stock_access.access_delete_group,1,0,0,1
+access_l1_barcode_nomenclature_stock_user,barcode.nomenclature.stock.user,barcodes.model_barcode_nomenclature,stock_access.access_delete_group,1,0,0,1
+access_l1_barcode_rule_stock_user,barcode.rule.stock.user,barcodes.model_barcode_rule,stock_access.access_delete_group,1,0,0,1
+access_l1_stock1_scrap_user,stock.scrap.user,stock.model_stock_scrap,stock_access.access_delete_group,1,0,0,1
+access_l1_report_stock_quantity,access_report_stock_quantity,stock.model_report_stock_quantity,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_traceability_report,access.stock.traceability.report,stock.model_stock_traceability_report,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_assign_serial,access.stock.assign.serial,stock.model_stock_assign_serial,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_return_picking_line,access.stock.return.picking.line,stock.model_stock_return_picking_line,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_return_picking,access.stock.return.picking,stock.model_stock_return_picking,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_change_product_qty,access.stock.change.product.qty,stock.model_stock_change_product_qty,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_scheduler_compute,access.stock.scheduler.compute,stock.model_stock_scheduler_compute,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_immediate_transfer_line,access.stock.immediate.transfer.line,stock.model_stock_immediate_transfer_line,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_immediate_transfer,access.stock.immediate.transfer,stock.model_stock_immediate_transfer,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_backorder_confirmation_line,access.stock.backorder.confirmation.line,stock.model_stock_backorder_confirmation_line,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_backorder_confirmation,access.stock.backorder.confirmation,stock.model_stock_backorder_confirmation,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_quantity_history,access.stock.quantity.history,stock.model_stock_quantity_history,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_rules_report,access.stock.rules.report,stock.model_stock_rules_report,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_warn_insufficient_qty_scrap,access.stock.warn.insufficient.qty.scrap,stock.model_stock_warn_insufficient_qty_scrap,stock_access.access_delete_group,1,0,0,1
+access_l1_product_replenish,access.product.replenish,stock.model_product_replenish,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_track_confirmation,access.stock.track.confirmation,stock.model_stock_track_confirmation,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_track_line,access.stock.track.line,stock.model_stock_track_line,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_package_destination,access.stock.package.destination,stock.model_stock_package_destination,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_orderpoint_snooze,access_stock_orderpoint_snooze,stock.model_stock_orderpoint_snooze,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_package_type_user,access_stock_package_type_user,stock.model_stock_package_type,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_storage_category_user,stock.storage.category.user,stock.model_stock_storage_category,stock_access.access_delete_group,1,0,0,1
+access_l1_stock_storage_category_capacity_user,stock.storage.category.capacity.user,stock.model_stock_storage_category_capacity,stock_access.access_delete_group,1,0,0,1
+access_l1_mrp_plan_user,mrp.plan.user,mrp_plan.model_mrp_plan,stock_access.access_delete_group,1,0,0,1
+access_l1_mrp_production,mrp.production user,mrp.model_mrp_production,stock_access.access_delete_group,1,0,0,1
+access_l1_mrp_plan_manager,mrp.plan.manager,mrp_plan.model_mrp_plan,stock_access.access_delete_group,1,0,0,1
+access_l1_fleet_vehicle,fleet.vehicle,fleet.model_fleet_vehicle,stock_access.access_delete_group,1,0,0,0
+access_l1_uom_category,uom.category,point_of_sale.model_uom_category,stock_access.access_delete_group,1,0,0,1
+access_l1_uom_uom,uom.uom,point_of_sale.model_uom_uom,stock_access.access_delete_group,1,0,0,1
+access_l1_product_category,product.category,product.model_product_category,stock_access.access_delete_group,1,0,0,1
+access_l1_mrp_bom,mrp.bom,mrp.model_mrp_bom,stock_access.access_delete_group,1,0,0,0
+access_l1_mrp_production,mrp.production user,mrp.model_mrp_production,stock_access.access_delete_group,1,1,0,0
+
+
+
+
+access_l11_procurement_group,procurement.group,stock.model_procurement_group,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_warehouse_user,stock.warehouse.user,stock.model_stock_warehouse,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_location_user,stock.location.user,stock.model_stock_location,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_picking_user,stock.picking user,stock.model_stock_picking,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_picking_type_all,stock.picking.type all users,stock.model_stock_picking_type,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_picking_type_user,stock.picking.type user,stock.model_stock_picking_type,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_production_lot_user,stock.production.lot user,stock.model_stock_production_lot,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_move_user,stock.move user,stock.model_stock_move,stock_access.access_update_groupe,1,1,0,0
+access_l11_product_product_stock_user,product_product_stock_user,product.model_product_product,stock_access.access_update_groupe,1,1,0,0
+access_l11_product_template_stock_user,product.template stock user,product.model_product_template,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_warehouse_orderpoint,stock.warehouse.orderpoint,stock.model_stock_warehouse_orderpoint,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_quant_user,stock.quant user,stock.model_stock_quant,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_quant_all,stock.quant all users,stock.model_stock_quant,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_quant_package_all,stock.quant.package all users,stock.model_stock_quant_package,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_quant_package_stock_user,stock.quant.package stock user,stock.model_stock_quant_package,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_package_level_all,stock.package_level all users,stock.model_stock_package_level,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_package_level_stock_user,stock.package_level stock user,stock.model_stock_package_level,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_rule_user,stock_rule user,stock.model_stock_rule,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_location_route,stock.location.route,stock.model_stock_location_route,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_rule_internal,stock.rule.flow internal,stock.model_stock_rule,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_move_line_user,stock.move.line user,stock.model_stock_move_line,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_move_line_all,stock.move.line all users,stock.model_stock_move_line,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_putaway_all,stock.putaway.rule all users,stock.model_stock_putaway_rule,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_removal_all,product.removal all users,stock.model_product_removal,stock_access.access_update_groupe,1,1,0,0
+access_l11_barcode_nomenclature_stock_user,barcode.nomenclature.stock.user,barcodes.model_barcode_nomenclature,stock_access.access_update_groupe,1,1,0,0
+access_l11_barcode_rule_stock_user,barcode.rule.stock.user,barcodes.model_barcode_rule,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock1_scrap_user,stock.scrap.user,stock.model_stock_scrap,stock_access.access_update_groupe,1,1,0,0
+access_l11_report_stock_quantity,access_report_stock_quantity,stock.model_report_stock_quantity,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_traceability_report,access.stock.traceability.report,stock.model_stock_traceability_report,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_assign_serial,access.stock.assign.serial,stock.model_stock_assign_serial,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_return_picking_line,access.stock.return.picking.line,stock.model_stock_return_picking_line,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_return_picking,access.stock.return.picking,stock.model_stock_return_picking,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_change_product_qty,access.stock.change.product.qty,stock.model_stock_change_product_qty,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_scheduler_compute,access.stock.scheduler.compute,stock.model_stock_scheduler_compute,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_immediate_transfer_line,access.stock.immediate.transfer.line,stock.model_stock_immediate_transfer_line,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_immediate_transfer,access.stock.immediate.transfer,stock.model_stock_immediate_transfer,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_backorder_confirmation_line,access.stock.backorder.confirmation.line,stock.model_stock_backorder_confirmation_line,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_backorder_confirmation,access.stock.backorder.confirmation,stock.model_stock_backorder_confirmation,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_quantity_history,access.stock.quantity.history,stock.model_stock_quantity_history,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_rules_report,access.stock.rules.report,stock.model_stock_rules_report,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_warn_insufficient_qty_scrap,access.stock.warn.insufficient.qty.scrap,stock.model_stock_warn_insufficient_qty_scrap,stock_access.access_update_groupe,1,1,0,0
+access_l11_product_replenish,access.product.replenish,stock.model_product_replenish,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_track_confirmation,access.stock.track.confirmation,stock.model_stock_track_confirmation,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_track_line,access.stock.track.line,stock.model_stock_track_line,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_package_destination,access.stock.package.destination,stock.model_stock_package_destination,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_orderpoint_snooze,access_stock_orderpoint_snooze,stock.model_stock_orderpoint_snooze,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_package_type_user,access_stock_package_type_user,stock.model_stock_package_type,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_storage_category_user,stock.storage.category.user,stock.model_stock_storage_category,stock_access.access_update_groupe,1,1,0,0
+access_l11_stock_storage_category_capacity_user,stock.storage.category.capacity.user,stock.model_stock_storage_category_capacity,stock_access.access_update_groupe,1,1,0,0
+access_l11_mrp_plan_user,mrp.plan.user,mrp_plan.model_mrp_plan,stock_access.access_update_groupe,1,1,0,0
+access_l11_mrp_production,mrp.production user,mrp.model_mrp_production,stock_access.access_update_groupe,1,1,0,0
+access_l11_mrp_plan_manager,mrp.plan.manager,mrp_plan.model_mrp_plan,stock_access.access_update_groupe,1,1,0,0
+access_l11_fleet_vehicle,fleet.vehicle,fleet.model_fleet_vehicle,stock_access.access_update_groupe,1,1,0,0
+access_l11_uom_category,uom.category,point_of_sale.model_uom_category,stock_access.access_update_groupe,1,1,0,0
+access_l11_uom_uom,uom.uom,point_of_sale.model_uom_uom,stock_access.access_update_groupe,1,1,0,0
+access_l11_product_category,product.category,product.model_product_category,stock_access.access_update_groupe,1,1,0,0
+access_l11_mrp_bom,mrp.bom,mrp.model_mrp_bom,stock_access.access_update_groupe,1,0,0,0
+access_l11_mrp_production,mrp.production user,mrp.model_mrp_production,stock_access.access_update_groupe,1,1,0,0
+

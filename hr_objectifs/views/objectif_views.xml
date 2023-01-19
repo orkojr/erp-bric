@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="objectif_view_tree" model="ir.ui.view">
+            <field name="name">employee.objectif.tree</field>
+            <field name="model">employee.objectif</field>
+            <field name="arch" type="xml">
+                <tree string="Objectifs" multi_edit="1" sample="1">
+                    <field name="objectif" />
+                    <field name="employee_id" />
+                    <field name="date_echeance" />
+                    <field name="responsable_id" />
+                    <field name="en_cours" />
+                    <field name="progress" widget="progressbar" />
+                    <field name="employee_id1" invisible="1" />
+                    <field name="activity_ids" widget="list_activity" />
+                    <field name="activity_user_id" optional="hide" string="Activité par" widget="many2one_avatar_user"/>
+                </tree>
+            </field>
+        </record>
+        <record id="objectif_view_form" model="ir.ui.view">
+            <field name="name">employee.objectif.form</field>
+            <field name="model">employee.objectif</field>
+            <field name="arch" type="xml">
+                <form string="Objectifs">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="objectif" string="Objectif"/>
+                            <h1>
+                                <field name="objectif" placeholder="Ex . Livrer le chantier de Kribi"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="date_echeance"/>
+                                <field name="responsable_id"/>
+                            </group>
+                            <group name="progress" string="Progression">
+                                <field name="en_cours" widget="radio"  options="{'horizontal': true}"/>
+                                <field name="progress" widget="progressbar"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description" string="Description">
+                                <field name="description" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="objectif_view_kanban" model="ir.ui.view">
+            <field name="name">employee.objectif.kanban</field>
+            <field name="model">employee.objectif</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="objectif" string="Objectif"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_content oe_kanban_global_click o_kanban_get_form">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <strong><field name="objectif" string="Objectif"/></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <field name="employee_id" string="Employee"/>
+                                    </div>
+                                    <div class="col-8">
+                                        <field name="date_echeance"/>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="oe_kanban_bottom_right float-right">
+                                            <field name="progress" widget="progressbar"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="employee_objectif_view_filter" model="ir.ui.view">
+            <field name="name">employee.objectif.select</field>
+            <field name="model">employee.objectif</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="employee_id" />
+               </search>
+            </field>
+        </record>
+
+        <record id="employee_objectif_action" model="ir.actions.act_window">
+            <field name="name">Objectifs Employé </field>
+            <field name="res_model">employee.objectif</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="objectif_view_kanban"/>
+            <field name="search_view_id" ref="employee_objectif_view_filter"/>
+            <field name="context">{'search_default_employee_id': active_id}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Ajoutez un nouvel Objectif
+                </p><p>
+                    Suivez les objectifs de vos employés .
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

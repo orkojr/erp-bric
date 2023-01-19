@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="example_xlsx_report_view" model="ir.ui.view">
+        <field name="name">suivi.achat.report.wizard</field>
+        <field name="model">suivi.achat.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Options">
+                <separator string="Suivi des achats"/>
+                <group col="4">
+                    <field name="select_type" />
+                </group>
+                <group col="4" string="Periode" attrs="{'invisible':[('select_type', '=', 'an')]}" >
+                    <field name="date_deb" />
+                    <field name="date_fin" />
+                </group>
+                <group col="4" string="Annee" attrs="{'invisible':[('select_type', '!=', 'an')]}" >
+                    <field name="annee" attrs="{'required':[('select_type', '=', 'an')]}"/>
+                </group>
+                <footer>
+                    <button name="print_xlsx" string="Export report achat" type="object"
+                              default_focus="1" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_xlsx_report" model="ir.actions.act_window">
+        <field name="name">Excel</field>
+        <field name="res_model">suivi.achat.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="suivi_achat_excel_report" 
+        name="Suivi achat produit"
+        parent="purchase.purchase_report" 
+        action="action_xlsx_report"/>
+</odoo>

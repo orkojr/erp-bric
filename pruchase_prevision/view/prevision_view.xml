@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<record id="view_purchase_prevision_tree" model="ir.ui.view">
+		<field name="name">purchase.prevision.tree</field>
+		<field name="model">purchase.prevision</field>
+		<field name="priority">2</field>
+		<field name="arch" type="xml">
+			<tree string="Prévisions">
+				<field name="name"/>
+				<field name="planning_date"/>
+				<field name="planning_date_fin"/>
+				<field name="total_price" />
+			</tree>
+		</field>
+	</record>
+	<record id="view_purchase_prevision_form" model="ir.ui.view">
+		<field name="name">purchase.prevision.form</field>
+		<field name="model">purchase.prevision</field>
+		<field name="arch" type="xml">
+			<form string="Prévisions">
+				<sheet>
+					<h1 class="hidden-xs">
+						<field name="name" readonly="1"/>
+					</h1>
+					<group>
+						<group>
+							<label for="planning_date" string="Periode du"/>
+							<div name="planning_date" class="d-flex">
+								<field name="planning_date"  required="1"/>
+								<span class="oe_inline">au  </span>
+								<span class="oe_inline">  </span>
+								<field name="planning_date_fin"  required="1"/>
+							</div>
+						</group>
+						<group>
+							<field name="total_price" />
+						</group>
+					</group>
+					<notebook>
+						<page string="Previsions" name="previsions" >
+							<field name="line_prevision_ids">
+                                <tree>
+									<field name="name" />
+									<field name="day" />
+									<field name="montant" />
+								</tree>
+							</field>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="action_prevision"
+		model="ir.actions.act_window">
+		<field name="name">Prévisions</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">purchase.prevision</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Click here to create a record
+			</p>
+		</field>
+	</record>
+	
+		<menuitem id="menu_prevision_view" name="Prévisions achats"
+		action="action_prevision" parent="om_account_accountant.menu_accounting_bank_and_cash"
+		sequence="0"/>
+        
+</odoo>	
+			
+			
+			
+			

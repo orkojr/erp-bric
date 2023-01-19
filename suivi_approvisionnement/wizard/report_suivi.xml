@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="example_xlsx_report_view" model="ir.ui.view">
+        <field name="name">suivi.approvisionnement.report.wizard</field>
+        <field name="model">suivi.approvisionnement.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Options">
+                <separator string="Excel Report"/>
+                <group col="4">
+                    <field name="date_deb" />
+                    <field name="date_fin" />
+                </group>
+                <!-- <group col="4">
+                    <field name="select_type" />
+                </group>
+                <group string="Articles" attrs="{'invisible':[('select_type', '!=', 'product')]}" >
+                    <field name="product_id"  widget="many2many_tags" attrs="{'required':[('select_type', '=', 'product')]}"/>
+                </group>
+                <group string="Categories" attrs="{'invisible':[('select_type', '!=', 'categ')]}">
+                    <field name="category"  widget="many2many_tags" attrs="{'required':[('select_type', '=', 'categ')]}"/>
+                </group> -->
+                <footer>
+                    <button name="suivi_xlsx" string="Export report suivi" type="object"
+                              default_focus="1" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_xlsx_report" model="ir.actions.act_window">
+        <field name="name">Excel</field>
+        <field name="res_model">suivi.approvisionnement.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="suivi_approvisionnement_excel_report" 
+        name="Suivi approvisionnement produit"
+        parent="stock.menu_warehouse_report" 
+        action="action_xlsx_report"/>
+</odoo>

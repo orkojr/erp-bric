@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- <record id="habilitation_hr_employee_inherit_1" model="ir.ui.view">
+        <field name="name">hr.employee.habilitation.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//*/page[@name='personal_information']" position="attributes">
+                <attribute name="groups">rh_habilitation.access_lecture_group</attribute>
+           </xpath>
+            <xpath expr="//notebook/page[3]" position="attributes">
+                <attribute name="groups">rh_habilitation.access_lecture_group</attribute>
+            </xpath>
+            <xpath expr="//*/page[@name='suivi_epi']" position="attributes"> 
+                <attribute name="groups">rh_habilitation.access_lecture_group</attribute> 
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

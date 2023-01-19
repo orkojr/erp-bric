@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_prevision_user,purchase.prevision.user,model_purchase_prevision,purchase.group_purchase_user,1,1,0,0
+access_purchase_prevision_manager,purchase.prevision.manager,model_purchase_prevision,purchase.group_purchase_manager,1,1,1,1
+access_purchase_prevision_line_user,purchase.prevision.line.user,model_purchase_prevision_line,purchase.group_purchase_user,1,1,0,0
+access_purchase_prevision_line_manager,purchase.prevision.line.manager,model_purchase_prevision_line,purchase.group_purchase_manager,1,1,1,1
+access_prevision_article_user,prevision.article,model_prevision_article,purchase.group_purchase_user,1,1,0,0
+access_pprevision_article_manager,prevision.article.manager,model_prevision_article,purchase.group_purchase_manager,1,1,1,1
+

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="res_partner_inherit" model="ir.ui.view">
+        <field name="name">maintenance.equipment.inherit</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="before">
+                <field name="secteur"/>
+                
+            </xpath>
+           
+           <notebook position="inside">
+            <page name="point_controle" string="Points de contrôle">
+                <field name="checkpoint_ids" >
+                    <tree  editable="bottom">
+                        <field name="checkpoint_id"  widget="selection" />
+                    </tree>
+                </field>
+            </page>
+            <page name="Organes" string="Organes">
+                <field name="organe_ids" >
+                    <tree editable="bottom">
+                        <field name="organe_id"  widget="selection"  domain="[('id', '!=', id)]" />
+                    </tree>
+                </field>
+            </page>
+           </notebook>
+        </field>
+    </record>
+</odoo>
