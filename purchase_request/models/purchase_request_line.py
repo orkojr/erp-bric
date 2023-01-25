@@ -57,7 +57,7 @@ class PurchaseRequestLine(models.Model):
         string="Requested by",
         store=True,
     )
-    vehicule = fields.Many2one(
+    vehicul = fields.Many2one(
         comodel_name="fleet.vehicle",
         string="Vehicule",
         required=False,
@@ -653,7 +653,7 @@ class EmployeRequestLine(models.Model):
 
     vehicule = fields.Many2one(
         comodel_name="fleet.vehicle",
-        string="Moyen de transport",
+        string="Vehicule",
         required=False,
         tracking=True,
     )

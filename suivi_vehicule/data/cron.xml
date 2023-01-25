@@ -1,13 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <record id="suivi_epi_cron" model="ir.cron">
-        <field name="name">Equipement: La date de mise au rebut approche</field>
-        <field name="model_id" ref="model_maintenance_equipment"/>
+        <field name="name">Equipement: Temps d'utilisation pieces</field>
+        <field name="model_id" ref="model_maintenance_piece_line"/>
         <field name="state">code</field>
-        <!-- <field name="nextcall" eval="(DateTime.now().replace(hour=7, minute=0) + timedelta(days=0)).strftime('%Y-%m-%d %H:%M:%S')" /> -->
         <field name="doall" eval="False"/> 
         <field name="priority"> 99</field>
-        <field name="code">model.create_activity()</field>
+        <field name="code">model.utilisation()</field>
         <field name="interval_number">1</field>
         <field name="interval_type">minutes</field>
         <field name="numbercall">-1</field>

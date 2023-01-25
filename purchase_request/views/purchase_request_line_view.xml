@@ -163,6 +163,10 @@
                             />
                             <field name="currency_id" attrs="{'invisible': True}" />
                             <field name="cancelled" />
+                            <field
+                            name="vehicul"                        
+                            
+                        />
                         </group>
                     </group>
                     <group name="specifications">

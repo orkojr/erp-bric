@@ -8,14 +8,14 @@
         action="purchase.purchase_rfq"
         groups="mrp.group_mrp_manager"
     /> -->
-    <menuitem
+    <!-- <menuitem
     id="account_purchase_order1"
     sequence="4"
     parent="account.menu_finance"
     name="Demandes de prix"
     action="purchase.purchase_rfq"
     groups="account.group_account_manager"
-    />
+    /> -->
 
     <!-- <menuitem
     id="mrp_livraison1"

@@ -4,6 +4,8 @@
     'author': 'Third',
     'depends': [
         'sale',
+        'purchase_request',
+        'suivi_epi',
     ],
     'category': 'stock',
     'summary': """Custom Sales""",
@@ -13,9 +15,10 @@
     'license' : 'LGPL-3',
     'data': [
         'security/ir.model.access.csv',
-        'views/sale_order_view.xml',
+        'views/account_move_view.xml',
         'views/apporteur.xml',
         'views/menu.xml',
+        'views/hr_employee_inherit.xml',
         
     ],
    

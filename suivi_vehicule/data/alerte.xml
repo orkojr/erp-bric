@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="maintemenance_equipment_piece" model="ir.cron">
+        <field name="name">Equipement: Piece a changer</field>
+        <field name="model_id" ref="model_maintenance_equipment"/>
+        <field name="state">code</field>
+        <field name="doall" eval="False"/> 
+        <field name="priority"> 99</field>
+        <field name="code">model.create_activity()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+    </record>
+</odoo>

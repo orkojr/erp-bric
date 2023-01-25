@@ -41,5 +41,29 @@
                 
             </field>
         </record>
+
+
+        <!-- <record id="hr_equipment_request_view_form_inherit" model="ir.ui.view">
+            <field name="name">maintenance.request.inherit</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//notebook" position="inside">
+                    <page name="Pieces" string="Pieces">
+                        <field name="piece_ids" >
+                            <tree editable="bottom">
+                                <field name="piece_id"  options="{'no_quick_create':True, 'no_create_edit' : True, 'no_open': True}" 
+                                domain="[('product_tmpl_id.categ_id.name', '=', 'Pièces de rechange')]"
+                                />
+                                <field name="mise_en_marche"   />
+                                <field name="progress" widget="progressbar"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                
+            </field>
+        </record> -->
     </data>
 </odoo>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 from odoo.exceptions import AccessError, UserError, ValidationError
 
 class SaleOrderLine(models.Model):

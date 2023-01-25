@@ -11,7 +11,7 @@
                 <header>
                     <button
                         name="button_draft"
-                        states="to_approve,approved,rejected,done"
+                        states="to_approve,approved,rejected,done,approved_direction"
                         string="Reset"
                         type="object"
                         groups="purchase_request.group_purchase_request_manager"
@@ -141,6 +141,7 @@
                     <h1>
                         <field name="is_editable" attrs="{'invisible': True}" />
                         <field name="is_name_editable" invisible="1" />
+                        <field name="is_administration" invisible="1"/>
                         <field
                             name="name"
                             class="oe_inline"
@@ -222,6 +223,11 @@
                                 widget="selection"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
                             />
+                            <field
+                                name="mode_payment"
+                                
+                                
+                            />
                            
                         </group>
                         <group>
@@ -244,6 +250,7 @@
                                 attrs="{'readonly': True}"
                             />
                         </group>
+
                         <!-- <group string="Moyen de transport">
                             
                             <field
@@ -512,6 +519,7 @@
              
             <xpath expr='//group[@id="header_right_group"]' position="inside"> 
                 <field name="purchase_request"/>
+                <field name="employe_request"/>
               
 
             </xpath>  

@@ -7,9 +7,17 @@
             <field name="name">sale.apporteur.view.tree</field>
             <field name="model">sale.apporteur</field>
             <field name="arch" type="xml">
-                <tree string="Apporteurs">
+                <tree string="Commissions">
+                    <field name="move_id"/>
                     <field name="partner_id" />
+                    <field name="employe_id" />
                     <field name="commission" />
+                    <field name="cout"/>
+                    <field name="validation_date"/>
+                    <field name="is_paid"/>
+                    <field name="paid_date"/>
+                   
+
                 </tree>
             </field>
         </record>
@@ -18,11 +26,28 @@
             <field name="name">sale.apporteur.view.form</field>
             <field name="model">sale.apporteur</field>
             <field name="arch" type="xml">
-                <form string="Apporteurs">
+                <form string="Commissions">
+                    <header>
+					
+					
+                        <button name="valide" string="Valider" type="object" attrs="{'invisible':[('state','in',('cancel','valide'))]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>	
                     <sheet>
-                        <group col='4'>
-                            <field name="partner_id" />
-                            <field name="commission" />
+                        <group>
+                            <group>
+                                <field name="move_id"/>
+                                <field name="partner_id" />
+                                <field name="employe_id" />
+                                <field name="commission" />
+                                <field name="cout"/>
+                            </group>
+                            <group>
+                                <field name="validation_date"/>
+                                <field name="is_paid"/>
+                                <field name="paid_date"/>
+                                <field name="active"/>
+                            </group>
                         </group>
                     </sheet>
                 </form>
@@ -30,10 +55,19 @@
         </record>
         <!-- Action a effectuer sur les vues -->
         <record id="apporteur_action" model="ir.actions.act_window">
-            <field name="name">Apporteur</field>
+            <field name="name">Commissions</field>
             <field name="res_model">sale.apporteur</field>
             <field name="view_mode">tree,form</field>
         </record>
+
+        <menuitem
+            id="commissions_vente"
+            sequence="2"
+            parent="sale.sale_menu_root"
+            name="Commissions sur vente"
+            action="apporteur_action"
+            groups=""
+            />
     
     </data>
     

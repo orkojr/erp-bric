@@ -16,7 +16,6 @@ class MaintenanceEquipment(models.Model):
     organe_ids = fields.One2many('maintenance.organe', 'parent_id', string="Organe")
     secteur = fields.Selection(string='Secteur',selection=[('unite_production', 'Unite de production'), ('parc_info', 'Parc informatique'), ('autres', 'Autres')],default='unite_production')
     checkpoint_ids = fields.One2many(string='Point de controle',comodel_name='maintenance.checkpoint.line',inverse_name='equipment_id',)
-    # piece_ids = fields.One2many(string='Pièces',comodel_name='maintenance.piece.line',inverse_name='equipment_id',)
     
     
     

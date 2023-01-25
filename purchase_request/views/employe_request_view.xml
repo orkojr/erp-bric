@@ -24,13 +24,23 @@
                         class="oe_highlight"
                         groups=""
                     />
+                    <!-- <button
+                        name="button_submit_admin"
+                        states="draft"
+                        string="Soumettre a la Direction"
+                        type="object"
+                        class="oe_highlight"
+                        
+                        groups=""
+                    /> -->
                     <button
                         name="button_to_approve"
                         states="soumettre"
                         string="Demande d'achat"
                         type="object"
                         class="oe_highlight"
-                        groups="purchase_request.group_employe_request_manager"
+                        
+                        groups="purchase_request.group_purchase_request_create"
                     />
                     <button
                         name="button_stock"
@@ -38,7 +48,8 @@
                         string="En stock"
                         type="object"
                         class="oe_highlight"
-                        groups="stock.group_stock_manager"
+                        attrs="{'invisible':[('is_administration', '=', True)]}"
+                        groups="purchase_request.group_purchase_request_stock"
                     />
                    <!--  <button
                         name="button_approved"
@@ -51,14 +62,14 @@
                     
 
 
-                    <!-- <button
+                    <button
                         name="button_done"
-                        states="approved"
-                        string="Done"
+                        states="soumettre"
+                        string="Termine"
                         type="object"
                         class="oe_highlight"
-                        groups="purchase_request.group_employe_request_manager"
-                    /> -->
+                        groups="purchase_request.group_employe_request_direction"
+                    />
                   <!--   <button
                         name="button_rejected"
                         states="to_approve,approved"
@@ -159,17 +170,18 @@
                                 attrs="{'readonly': [('is_editable','=', False)]}"
                             />
                             <field
-                                name="service_demandeur_id"
+                                name="service_demandeur_id" options="{'no_create': True}"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
                             />
                             <field
-                                name="service_id"
+                                name="service_id" options="{'no_create': True}"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
                             />
                             <field
                                 name="assigned_to"
                                 attrs="{'readonly': [('is_editable','=', False)]}" invisible="1"
                             />
+                            <field name="is_administration" />
                             <field
                                 name="description"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
@@ -184,12 +196,27 @@
                                     class="oe_inline"
                                     attrs="{'readonly': [('is_editable','=', False)]}"
                                 />
-                                
+                                <field
+                                    name="is_enlevement"
+                                    class="oe_inline"
+                                    attrs="{'invisible': [('objet', '!=', 'appro_mp')], 'readonly': [('is_editable','=', False)]}"
+                                />
+                                <field
+                                    name="commande_id"
+                                    class="oe_inline"
+                                    attrs="{'invisible': [('is_enlevement', '=', False)], 'readonly': [('is_editable','=', False)]}"
+                                />
+                                <field
+                                    name="motif_achat"
+                                    class="oe_inline"
+                                    attrs="{'readonly': [('is_editable','=', False)]}"
+                                />
                                 <!-- <field
                                     name="motif"
                                     class="oe_inline"
                                     attrs="{'readonly': [('is_editable','=', False)], 'invisible':True}"
                                 /> 
+                                
                                 <field
                                     name="motif_achat"
                                     class="oe_inline"
@@ -279,19 +306,23 @@
                                     
                                     <field
                                         name="product_uom_id"
-                                        groups="uom.group_uom" attrs="{'readonly': [('is_editable','=', False)]}"
+                                        groups="uom.group_uom" options="{'no_create': True}" attrs="{'readonly': [('is_editable','=', False)]}"
                                     />
                                     <field
+                                        name="price_unit" attrs="{'column_invisible': [('parent.is_administration', '=', False)]}"
+                                    />
+                                    <field name="estimated_cost" widget="monetary" attrs="{'column_invisible': [('parent.is_administration', '=', False)]}"/>
+                                    <field
                                         name="is_purchase"
-                                        groups="purchase_request.group_employe_request_manager" attrs="{'column_invisible': [('parent.state', '=', 'draft')]}"
+                                        groups="purchase_request.group_employe_request_manager" attrs="{'column_invisible': ['|',('parent.state', '=', 'draft'),('parent.is_administration', '=', True)]}"
                                     />
                                     
                                     <field
                                         name="company_id"
                                         groups="base.group_multi_company"
                                         widget="selection"
-                                    />
-                                    <field name="vehicule"/>
+                                    /> 
+                                    <field name="vehicule" options="{'no_create': True}"/>
                                     <button
                                         name="action_show_details"
                                         type="object"

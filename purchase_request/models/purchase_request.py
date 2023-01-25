@@ -25,6 +25,12 @@ _OBJET = [
     ("projet", "Chantier"),
 ]
 
+_MODE = [
+    ("bank", "Banque"),
+    ("caisse", "Caisse"),
+
+]
+
 _STATES1 = [
     ("draft", "Bon de commande Interne"),
     ("soumettre", "Soumis"),
@@ -145,7 +151,7 @@ class PurchaseRequest(models.Model):
     service_id = fields.Many2one(
         'hr.department', 
         'Service Beneficiaire', 
-        required=True,
+        
     )
     service_demandeur_id = fields.Many2one(
         'hr.department', 
@@ -235,7 +241,17 @@ class PurchaseRequest(models.Model):
         copy=False,
         default="appro",
     )
+    mode_payment = fields.Selection(
+        selection=_MODE,
+        string="Mode de paiement",
+        index=True,
+        tracking=True,
+        required=True,
+        copy=False,
+        default="caisse",
+    )
     is_editable = fields.Boolean(compute="_compute_is_editable", readonly=True)
+    is_administration = fields.Boolean(string="Administration", default = False, readonly=True)
     to_approve_allowed = fields.Boolean(compute="_compute_to_approve_allowed")
     picking_type_id = fields.Many2one(
         comodel_name="stock.picking.type",
@@ -270,7 +286,7 @@ class PurchaseRequest(models.Model):
         store=True,
     )
     emplo_req_ids = fields.Many2one("employe.request", string='Demande interne', copy=False)
-
+    
     #repair_ids = fields.One2many('maintenance.request', 'purchase_id', readonly=True, copy=False)
     @api.onchange('requested_by')
     def onchange_requested_by(self):
@@ -421,7 +437,10 @@ class PurchaseRequest(models.Model):
 
     def button_draft(self):
         self.mapped("line_ids").do_uncancel()
-        return self.write({"state": "to_approve"})
+        if self.state == 'approved':
+            return self.write({"state": "to_approve"})
+        else:
+            return self.write({"state": "approved"})
     def button_submit(self):
         
         return self.write({"state": "soumettre"})
@@ -437,14 +456,14 @@ class PurchaseRequest(models.Model):
 
     def button_approved(self):
         if self.objet == "appro_mp":
-            for line in self.line_ids:
+            """ for line in self.line_ids:
                 if len(line.line_cout_ids) == 0:
                      raise UserError(
                     _(
                         "Svp Veuillez renseigner les couts lies a l'achat de la Matiere Premiere"
                         "Cliquez sur le bouton :Autres couts lies"
                     )
-                )     
+                )     """ 
         requete = self.env["employe.request"].search([("purchase_ids", "=", self.id)])
         requete.write({"state":"approved"})
         return self.write({"state": "approved", "date_approbation": fields.Date.today()})
@@ -468,6 +487,7 @@ class PurchaseRequest(models.Model):
             "group_id": group_id.id,
             "state":'purchase',
             "purchase_request": self.id,
+            "mode_payment": self.mode_payment,
 
         }
 
@@ -557,8 +577,11 @@ class PurchaseRequest(models.Model):
             if item.supplier_id:
                 if item.supplier_id not in supplier:
                     supplier.append(item.supplier_id)
-            if not item.supplier_id and item.is_recu == True:
-                item_tab.append(item)
+            else: 
+                if item.is_recu == False:
+                    raise UserError(_("Veuillez preciser si il y'a pas de fournisseur pour cette demande"))
+                else:
+                    item_tab.append(item)
         if len(item_tab) != 0:
 
             po_data = self._prepare_account_move()
@@ -702,7 +725,7 @@ class PurchaseRequest(models.Model):
 
 class PurchaseAccountMove(models.Model):
     _inherit = "account.move"
-
+    employe_request = fields.Many2one(comodel_name="employe.request", readonly=True, copy=False, string="Demande interne")    
     purchase_request = fields.Many2one(comodel_name="purchase.request", readonly=True, copy=False, string="Demande d'achat")    
     group_ligne = fields.Boolean(string="Grouper les lignes de depenses")
 
@@ -819,21 +842,21 @@ class EmployeRequest(models.Model):
     
     motif_achat = fields.Many2one(
         'account.budget.post', 
-        'Motif', 
+        'Motif'
         
     )
    
     
     assigned_to = fields.Many2one(
         comodel_name="res.users",
-        string="Approver",
+        string="Approbateur",
         tracking=True,
         
         domain=lambda self: [
             (
                 "groups_id",
                 "in",
-                self.env.ref("purchase_request.group_purchase_request_manager").id,
+                self.env.ref("purchase_request.group_employe_request_manager").id,
             )
         ],
         index=True,
@@ -880,9 +903,10 @@ class EmployeRequest(models.Model):
     )
     is_editable = fields.Boolean(compute="_compute_is_editable", readonly=True)
     to_approve_allowed = fields.Boolean(compute="_compute_to_approve_allowed")
+    is_administration = fields.Boolean(string="Depenses Administratives", default = False)
     
-    
-    
+    is_enlevement = fields.Boolean(string="Enlèvement MP", default = False)
+    commande_id = fields.Many2one("purchase.order", string='Bon de commande', copy=False)
     purchase_count = fields.Integer(
         string="Purchases count", compute="_compute_purchase_count", readonly=True
     )
@@ -1040,13 +1064,13 @@ class EmployeRequest(models.Model):
             request.message_subscribe(partner_ids=[partner_id])
         return request
 
-    """ def write(self, vals):
+    def write(self, vals):
         res = super(EmployeRequest, self).write(vals)
-        for request in self:
+        """ for request in self:
             if vals.get("assigned_to"):
                 partner_id = self._get_partner_id(request)
-                request.message_subscribe(partner_ids=[partner_id])
-        return res """
+                request.message_subscribe(partner_ids=[partner_id]) """
+        return res 
 
     def _can_be_deleted(self):
         self.ensure_one()
@@ -1064,9 +1088,20 @@ class EmployeRequest(models.Model):
         self.mapped("line_ids").do_uncancel()
         return self.write({"state": "draft"})
     def button_submit(self):
+        for line in self.line_ids:
+                if line.product_id.suivi_vehicule == True:
+                    if not line.vehicule:
+                        raise UserError(_("Veuillez renseigner le vehicule."))
         
         return self.write({"state": "soumettre", "date_demande_autorisation": fields.Date.today()})
-
+    
+    def button_submit_admin(self):
+        for line in self.line_ids:
+                if line.product_id.suivi_vehicule == True:
+                    if not line.vehicule:
+                        raise UserError(_("Veuillez renseigner le vehicule."))
+        
+        return self.write({"state": "soumettre", "date_demande_autorisation": fields.Date.today()})
     def button_to_approve(self):
         self.to_approve_allowed_check()
         self.make_purchase_request()
@@ -1095,6 +1130,7 @@ class EmployeRequest(models.Model):
             "description":description,
             "state":'to_approve',
             "emplo_req_ids": self.id,
+            "assigned_to": self.assigned_to.id,
 
 
         }
@@ -1114,6 +1150,7 @@ class EmployeRequest(models.Model):
             "product_uom_id": item.product_uom_id.id,
             
             "product_qty": qty,
+            "vehicule": item.vehicule.id,
             
             
         }
@@ -1131,8 +1168,8 @@ class EmployeRequest(models.Model):
         compteur = 0
         supplier = []
         #print ("TABLEAU FOURNISSEUR",supplier)
-        request_by = self.env["res.users"].browse(self.env.uid)
-
+        #request_by = self.env["res.users"].browse(self.env.uid)
+        request_by = self.requested_by
         print ("TABLEAU FOURNISSEUR",request_by)
         service = request_by.employee_id.department_id
         service_beneficiaire = self.service_id
@@ -1140,8 +1177,8 @@ class EmployeRequest(models.Model):
         description = self.description
         po_data = self._prepare_purchase_request(
                 request_by,
-                service,
                 service_beneficiaire,
+                service,
                 objet,
                 description
                 )
@@ -1172,6 +1209,136 @@ class EmployeRequest(models.Model):
             "name": _("Demande d'achat"),
             "view_mode": "tree,form",
             "res_model": "purchase.request",
+            "view_id": False,
+            "context": False,
+            "type": "ir.actions.act_window",
+        }
+
+    def make_purchase_request_admin(self):
+        res = []
+        purchase_obj = self.env["purchase.request"]
+        po_line_obj = self.env["purchase.order.line"]
+        pr_line_obj = self.env["purchase.request.line"]
+        purchase = False
+        compteur = 0
+        supplier = []
+        #print ("TABLEAU FOURNISSEUR",supplier)
+        #request_by = self.env["res.users"].browse(self.env.uid)
+        request_by = self.requested_by
+        print ("TABLEAU FOURNISSEUR",request_by)
+        service = request_by.employee_id.department_id
+        service_beneficiaire = self.service_id
+        objet = self.objet
+        description = self.description
+        po_data = self._prepare_purchase_request(
+                request_by,
+                service_beneficiaire,
+                service,
+                objet,
+                description
+                )
+        purchase = purchase_obj.create(po_data)
+        purchase.write({"is_administration":True})
+        for item in self.line_ids:
+            po_line_data = self._prepare_purchase_request_line(purchase, item)
+            
+            po_line = pr_line_obj.create(po_line_data)
+        
+            
+            res.append(purchase.id)
+           
+        self.purchase_ids=purchase.id
+            
+            
+
+            
+
+        #line.request_id.write({"state": "po_ro"})
+        return {
+            "domain": [("id", "in", res)],
+            "name": _("Demande d'achat"),
+            "view_mode": "tree,form",
+            "res_model": "purchase.request",
+            "view_id": False,
+            "context": False,
+            "type": "ir.actions.act_window",
+        }
+
+    @api.model
+    def _prepare_account_move(self):
+        move_type = self._context.get('default_move_type', 'in_receipt')    
+        
+        data = {
+               
+            'move_type': move_type,
+            'company_id': self.company_id,
+            'invoice_line_ids': [],
+            'employe_request': self,
+            
+        }
+        return data
+    @api.model
+    def _prepare_account_move_line(self, item, move=False):
+        if not item.product_id:
+            raise UserError(_("Please select a product for all lines"))
+        product = item.product_id
+
+        
+        date_required = item.date_required
+        vals = {
+            "name": product.name,
+            
+            "product_id": product.id,
+            "product_uom_id": product.uom_po_id.id or product.uom_id.id,
+            "price_unit": item.price_unit,
+            "quantity": item.product_qty,
+            "account_id": product.property_account_expense_id.id,
+       
+        }
+     
+        return vals
+
+    def make_purchase_order(self):
+        res = []
+        purchase_obj = self.env["purchase.order"]
+        po_line_obj = self.env["purchase.order.line"]
+        pr_line_obj = self.env["purchase.request.line"]
+        move_obj = self.env["account.move"]
+        move_line_obj = self.env["account.move.line"]
+        purchase = False
+        compteur = 0
+        supplier = []
+        item_tab = []
+        invoice_vals_list = []
+        print ("TABLEAU FOURNISSEUR",supplier)
+        po_data = self._prepare_account_move()
+        for item in self.line_ids:
+            if item.supplier_id:
+                if item.supplier_id not in supplier:
+                    supplier.append(item.supplier_id)
+            
+
+            
+            
+            if item.product_qty <= 0.0:
+                raise UserError(_("Enter a positive quantity."))
+        
+            # ENLEVER LA GENERATION DES ECRITURES COMPTABLES
+
+            po_data['invoice_line_ids'].append((0, 0, self._prepare_account_move_line(item)))
+            #item.request_id.write({"state": "po_ro"})
+            #po_line_data = self._prepare_account_move_line(purchase, item)
+        invoice_vals_list.append(po_data)  
+        moves = self.env['account.move']
+        AccountMove = self.env['account.move'].with_context(default_move_type='in_receipt')
+        for vals in invoice_vals_list:
+            moves |= AccountMove.with_company(vals['company_id']).create(vals)
+        res.append(moves.id)
+        return {
+            "domain": [("id", "in", res)],
+            "name": _("RFQ"),
+            "view_mode": "tree,form",
+            "res_model": "account.move",
             "view_id": False,
             "context": False,
             "type": "ir.actions.act_window",

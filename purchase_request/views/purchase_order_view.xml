@@ -85,6 +85,9 @@
             </xpath>
             <xpath expr="//field[@name='currency_id']" position="after">
                 <field name="purchase_request" />
+                <field
+                    name="mode_payment"
+                />
                 <button
                     attrs="{'invisible': [('state', '=', 'purchase')]}"
                     name="action_open_request_line"

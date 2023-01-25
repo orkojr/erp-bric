@@ -10,12 +10,25 @@ _OBJET = [
     ("admin", "Administration"),
     ("maint", "Maintenance"),
 ]
+_MODE = [
+    ("bank", "Banque"),
+    ("caisse", "Caisse"),
+
+]
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     service_id = fields.Many2one(
         'hr.department', 'Service')
-    
+    mode_payment = fields.Selection(
+        selection=_MODE,
+        string="Mode de paiement",
+        index=True,
+        tracking=True,
+        required=True,
+        copy=False,
+        default="caisse",
+    )
     motif = fields.Many2one(
         'request.motif', 'RAISON')
     motif_achat = fields.Many2one(
