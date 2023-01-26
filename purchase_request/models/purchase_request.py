@@ -455,15 +455,14 @@ class PurchaseRequest(models.Model):
         return self.write({"state": "stock"})
 
     def button_approved(self):
-        if self.objet == "appro_mp":
-            """ for line in self.line_ids:
-                if len(line.line_cout_ids) == 0:
-                     raise UserError(
-                    _(
-                        "Svp Veuillez renseigner les couts lies a l'achat de la Matiere Premiere"
-                        "Cliquez sur le bouton :Autres couts lies"
-                    )
-                )     """ 
+        
+        for line in self.line_ids:
+            if (line.product_uom_id.id != line.product_id.uom_po_id.id):
+                    raise UserError(
+                _(
+                    "Svp Veuillez renseigner l'unité de mesure dans l'article crée !!"
+                )
+            )     
         requete = self.env["employe.request"].search([("purchase_ids", "=", self.id)])
         requete.write({"state":"approved"})
         return self.write({"state": "approved", "date_approbation": fields.Date.today()})

@@ -30,7 +30,7 @@
                 <button name="action_employee_request"
                     type="object"
                     class="oe_stat_button"
-                    icon="fa-folder-open-o">
+                    icon="fa-folder-open-o" attrs="{'invisible':[('apporteur', '=', False)]}">
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_text">Demande</span>
                         <span class="o_stat_text">Interne</span>
