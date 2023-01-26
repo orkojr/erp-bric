@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_view" model="ir.ui.view">
+            <field name="name">Formulaire</field>
+            <field name="model">projet_chantier</field>
+            <field name="arch" type="xml">
+               <form>
+                <sheet>
+                    <h4 class="text-center">Création d'un nouveau modèle</h4>
+                    <group>
+                        <field name="titre"/>
+                    </group>
+                    <group>
+                        <field name="taches_ids">
+                            <tree>
+                                <field name="task"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet> 
+               </form>
+            </field>
+
+        </record>
+
+
+        <record id="modele_chantier" model="ir.actions.act_window">
+            <field name="name">Modèles</field>
+            <field name="res_model">projet_chantier</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu-->
+                <menuitem 
+                id="form_taches"   
+                name="Modèles"
+                parent="project.menu_project_config"
+                action="modele_chantier"
+                groups="group_creation,group_modification,group_lecture,group_validation,group_suppression"
+                sequence="10"/>
+
+                <menuitem 
+                id="project_templates"   
+                name="Créer un modèle"
+                parent="form_taches"
+                action="modele_chantier"
+                groups="group_creation,group_modification,group_lecture,group_validation,group_suppression"
+                sequence="10"/>
+
+                <!-- <menuitem 
+                id="project.menu_project_config"   
+                parent="project.menu_main_pm"/> -->
+
+                <!-- <menuitem 
+                id="project.menu_project_config"   
+                parent="project.menu_main_pm"
+                groups="group_suppresion"/> -->
+
+
+    </data>
+</odoo>

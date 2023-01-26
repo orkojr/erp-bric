@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="line_engin" model="ir.ui.view">
+            <field name="name">Création ligne engin</field>
+            <field name="model">fleet.vehicle.line</field>
+            <field name="arch" type="xml">
+                <form string="Tags">
+                    <sheet>
+                        <group>
+                            <field name="nom_engin"/>
+                            <field name="quantite" />
+                            <field name="nbre_jour"/>
+                            <field name="nbre_jour_total"/>
+                            <field name="prix_unitaire"/>
+                            <field name="prix_total" sum="Total des dépenses engins"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="model_engin_line_action" model="ir.actions.act_window">
+            <field name="name">Ligne Engin</field>
+            <field name="res_model">fleet.vehicle.line</field>
+            <field name="view_mode">tree,form</field>
+        </record> 
+
+    </data>
+</odoo>

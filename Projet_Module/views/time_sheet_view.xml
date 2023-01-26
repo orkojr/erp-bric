@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- Vue ajoutée au module feuilles de temps afin d'ajouter les durées en jour et pas en heure-->
+<odoo>
+    <data>
+        <record id="project_timesheet" model="ir.ui.view">
+            <field name="name">project_timesheet_new</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <field name="unit_amount" position="after">
+                    <field name="jour_passe" sum="Total durée"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="project_timesheet2" model="ir.ui.view">
+            <field name="name">project_timesheet_new2</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <xpath expr='//page[@name="description_page"]' position="after">   
+                    <page name="planification" string="Planification">
+                        <h5 class="text-center text-primary">Temporaires affectés à la tâche</h5>
+                        <field name="planif_employee_ids">
+                            <tree editable="bottom">
+                                <field name="name" required="1"></field>
+                            </tree>
+                        </field>
+                        
+                    </page>
+                </xpath>
+                
+            </field>
+        </record>
+    </data>
+</odoo>

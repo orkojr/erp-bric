@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="budget_line_prix_creation" model="ir.ui.view">
+            <field name="name">Budget_Prix</field>
+            <field name="model">budget.tache.line.price</field>
+            <field name="arch" type="xml">
+               <form>
+                <sheet>
+                   <group>
+                        <field name="analytic_account_posteD_id" required="1"/>
+                            <field name="quantite"/>
+                            <field name="prix_u"/>
+                            <field name="c_t"/>
+                            <field name="c_r"/> 
+                    </group>
+                </sheet>
+               </form>
+               
+            </field>
+        </record>
+
+        <record id="budget_tache_prix_action" model="ir.actions.act_window">
+            <field name="name">Budget_prix_action</field>
+            <field name="res_model">budget.tache.line.price</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+      
+    </data>
+</odoo>

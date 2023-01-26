@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Ajout d'un champ et d'un bouton dans le formulaire de création d'un projet-->
+    <record id="form_view2" model="ir.ui.view">
+        <field name="name">Nouveau_Champ</field>
+        <field name="model">project.project</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="project.project_project_view_form_simplified_footer"/>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">    
+            <xpath expr='//button[@name="action_view_tasks"]' position='replace'/>        
+            <field name="name" position="after">
+                <field name="nom_module_id" required="1"/>
+            </field>
+            <footer>
+                <button string="Créer en générant le modèle" name="action_view_tasks2" type="object" class="btn-primary o_open_tasks" data-hotkey="q"/>
+            </footer>
+        </field>
+    </record>
+</odoo>

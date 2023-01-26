@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="projet_engin" model="ir.ui.view">
+            <field name="name">Création engin</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="arch" type="xml">
+                <form string="Tags">
+                    <sheet>
+                        <group>
+                            <field name="model_id"/>
+                            <field name="license_plate"/>
+                            <field name="nom"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="model_engin_action" model="ir.actions.act_window">
+            <field name="name">Engin</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_mode">tree,form</field>
+        </record> 
+
+    </data>
+</odoo>

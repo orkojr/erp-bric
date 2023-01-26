@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_view1" model="ir.ui.view">
+            <field name="name">Formulaire2</field>
+            <field name="model">taches</field>
+            <field name="arch" type="xml">
+               <form>
+                <sheet>
+                    <h4 class="text-center">Création d'une nouvelle tâche</h4>
+                    <group>
+                        <field name="task"/>
+                        <field name="code"/>
+                        <field name="subtask_ids"/>
+                    </group>
+                   
+                </sheet>
+               </form>
+            </field>
+        </record>
+
+        <record id="modele_chantier2" model="ir.actions.act_window">
+            <field name="name">Tâches</field>
+            <field name="res_model">taches</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+      
+    </data>
+</odoo>

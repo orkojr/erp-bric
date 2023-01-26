@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- Ajout de la page planification et du champ modèle lors de la création d'un projet à partir du menu configuration-->
+<odoo>
+    <data>
+        <record id="new_project" model="ir.ui.view">
+            <field name="name">new_project</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="priority">12</field>
+            <field name="arch" type="xml">
+                <field name="tag_ids" position="after">
+                    <field name="nom_module_id"/>
+                </field>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

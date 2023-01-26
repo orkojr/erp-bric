@@ -1,0 +1,45 @@
+{
+    'name' : "Projet_Chantiers",
+    'version':'1.0',
+    'description':'Customization du module projet pour la création de fichiers excel pour la gestion des projets-chantiers',
+    'inherits' :'project',
+    'summary': 'Creation de formulaires pour éditer les tâches qui permettront de créer le fichier excel permettant la gestion des projets',
+    'author':'Aissatou Issa',
+    'depends':['base',
+               'project',
+               'analytic',
+               'hr',
+               'hr_timesheet',
+               'hr_fleet',
+               'fleet',
+               ],
+    'license':'LGPL-3',
+    'application':True,
+
+ 'data': [
+     'security/user_groups.xml',
+     'security/ir.model.access.csv',
+     'views/modele_menu.xml',
+     'views/custom.xml',
+     'views/planning_excel.xml',
+     'views/tache_view.xml',
+     'views/sous_taches_view.xml',
+     'views/project_timesheet_view.xml',
+     'views/engin_view.xml',
+     'views/creation_engin.xml',
+    #  'Views/engin_line_view.xml',
+     'views/time_sheet_view.xml',
+     'views/new_project.xml',
+     'views/budget_creation.xml',
+     'views/budget.xml',
+     'views/menu_budget.xml',
+     'views/budget_line_prix_view.xml',
+     'views/account_analytic_view.xml',
+     'views/ligne_budget_creation.xml',
+     'views/imputation_budgetaire_form.xml',
+     'views/imputation_budgetaire_view.xml',
+     
+
+]
+
+}

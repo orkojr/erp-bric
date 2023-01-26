@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="employee_view" model="ir.ui.view">
+            <field name="name">Ajout employé_tâche</field>
+            <field name="model">project.task</field>
+            <field name="arch" type="xml">
+                <form string="Tags">
+                    <sheet>
+                        <field name="employee_name_ids">
+                            <tree>
+                                <field name="employee_id"/>
+                            </tree>
+                        </field>
+                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="employee_action" model="ir.actions.act_window">
+            <field name="name">Employee</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="view_mode">tree,form</field>
+        </record> 
+
+        
+
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue de la page engin dans la vue détaillée d'une tâche-->
+    <record id="form_view_engin" model="ir.ui.view">
+        <field name="name">nouvel_engin_champ</field>
+        <field name="model">project.task</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml"> 
+            <xpath expr='//page[@name="description_page"]' position="after">   
+                <page name="engin_page" string="Engins">
+                    <field name="tache_engin_ids">
+                        <tree editable='bottom'>
+                            <!-- <field name="model_id"/> -->
+                            <field name="nom_engin"/>
+                            <field name="quantite" />
+                            <field name="nbre_jour"/>
+                            <field name="nbre_jour_total"/>
+                            <field name="prix_unitaire"/>
+                            <field name="prix_total" sum="Total des dépenses engins"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

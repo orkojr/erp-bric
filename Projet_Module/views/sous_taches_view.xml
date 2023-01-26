@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_subtask_view" model="ir.ui.view">
+            <field name="name">Formulaire_sous_tache</field>
+            <field name="model">sous_taches</field>
+            <field name="arch" type="xml">
+               <form>
+                    
+                        <h4 class="text-center">Création d'une nouvelle sous-tâche</h4>
+                        <group>
+                            <field name="Subtask"/>
+                            <field name="quantite"/>
+                        </group>
+                    
+               </form>
+            </field>
+        </record>
+
+        <record id="modele_chantier3" model="ir.actions.act_window">
+            <field name="name">Sous-tâches</field>
+            <field name="res_model">sous_taches</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+    </data>
+</odoo>

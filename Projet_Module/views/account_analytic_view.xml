@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Ajout d'un champ et d'un bouton dans le formulaire de création d'un compte analytique-->
+    <record id="form_account" model="ir.ui.view">
+        <field name="name">Nouveau_Champ_type</field>
+        <field name="model">account.analytic.account</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">    
+            <field name="name" position="after">
+                <h6>Type associé</h6>
+                <field name="type"/>
+            </field>
+        </field>
+    </record>
+</odoo>

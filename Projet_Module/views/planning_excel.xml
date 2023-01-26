@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Création d'un menu pour créer un modèle que l'on chargera lors de la création d'un modèle-->
+    <data>
+        <record id="project_export_form" model="ir.ui.view">
+            <field name="name"> Planning des travaux</field>
+            <field name="model">project.model.export</field>
+            <field name="arch" type="xml">
+                <form string="Planning des travaux">
+                    <group>
+                        <field name="chantier_export_id" required="1" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="debut" required="1"/>
+                    </group>
+                    <footer>
+                        <!-- Export-->
+                        <button name="get_excel_report" string="Exporter le modèle" type="object" class="btn-primary"/>
+                        <!-- Annuler-->
+                        <button string="Annuler" class="btn-danger" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action-->
+        <record model="ir.actions.act_window" id="action_open_form">
+            <field name="name">Planning des travaux</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.model.export</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <!-- Menu-->
+        <!-- <menuitem name="Exporter un modèle"
+        id="projet_module_report_in_excel"
+        parent="form_taches"
+        action="action_open_form" /> -->
+
+
+    </data>
+
+
+
+
+</odoo>

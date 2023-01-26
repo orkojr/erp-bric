@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="imputation_line_creation" model="ir.ui.view">
+            <field name="name">Imputation_line</field>
+            <field name="model">imputation.budgetaire</field>
+            <field name="arch" type="xml">
+               <form>
+                <sheet>
+                   <group>
+                            <field name="budget_id"/>
+                            <field name="budget_line_id"/>
+                            <field name="montant_total"/>
+                            <field name="montant_consomme"/>
+                            <field name="montant_restant"/> 
+                    </group>
+                </sheet>
+               </form>
+               
+            </field>
+        </record>
+
+        <record id="imp_line_action" model="ir.actions.act_window">
+            <field name="name">Imp_action</field>
+            <field name="res_model">imputation.budgetaire</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+      
+    </data>
+</odoo>

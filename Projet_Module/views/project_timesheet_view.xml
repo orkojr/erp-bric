@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Customisation de la page feuilles de temps-->
+<odoo>
+    <record id="time_sheet_fields" model="ir.ui.view">
+        <field name="name">Nouveaux_Champs_Date</field>
+        <field name="model">project.task</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+        <field eval="100" name="priority"/>
+        <field name="groups_id" eval="[(6,0, (ref('hr_timesheet.group_hr_timesheet_user'),))]"/>
+        <field name="arch" type="xml"> 
+        
+                <xpath expr="//field[@name='progress']" position='after'>
+                    <h5 class="text-primary" style="margin-top:82px">Bilan</h5>
+                    <field name="statut_demarrage" readonly="1"/>
+                    <field name="depassement_duree"/>
+                </xpath>
+
+                <xpath expr="//field[@name='subtask_planned_hours']" position='after'>
+                        <field name="date_debut_plan"/>
+                        <h5 class="text-primary" style="margin-top:15px">Périodes effectives</h5>
+                        <field name="duree_effective" readonly="1"/>
+                        <field name="debut_effectif" attrs="{'readonly': [('planned_hours', '==', 0)]}"/>     
+                        <field name="fin_effective" attrs="{'readonly': [('planned_hours', '==', 0)]}"/>   
+            </xpath>
+        </field>
+    </record>
+<!-- Ajout  du champ durée totale et champ unit_amount invisible-->
+    <record id="time_sheet_fields_tab" model="ir.ui.view">
+        <field name="name">timesheet_tab_field_new</field>
+        <field name="model">project.task</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+        <field eval="100" name="priority"/>
+        <field name="groups_id" eval="[(6,0, (ref('hr_timesheet.group_hr_timesheet_user'),))]"/>
+        <field name="arch" type="xml"> 
+            <xpath expr="//field[@name='timesheet_ids']/tree/field[@name='unit_amount']" position='after'>
+                <field name="jour_passe"/>
+            </xpath>
+            <xpath expr="//field[@name='timesheet_ids']/tree/field[@name='unit_amount']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+
+</odoo>

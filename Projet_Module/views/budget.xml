@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue de la page engin dans la vue détaillée d'une tâche-->
+    <record id="budget_view" model="ir.ui.view">
+        <field name="name">Budget</field>
+        <field name="model">project.task</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml"> 
+            <xpath expr='//page[@name="planification"]' position="after">   
+                <page name="budget" string="Budget">
+                    <field name="budget_tache_line_ids" readonly="1">
+                        <tree>
+                            <field name="task_budget_id"/>
+                            <field name="analytic_account_action_id"/>
+                            <field name="cout_total"/>
+                            <field name="cout_reel"/>
+
+                        </tree>
+                        <form>
+                            
+                            <group>
+                                <field name="proj_id" readonly="1" />
+                                <field name="analytic_account_action_id" required="1"/>
+                                <field name="task_budget" required="1"/>
+                                <field name="task_budget_id" context="{'project_id':parent.project_id}" domain="[('project_id', '=', proj_id)]"/>
+                                <field name="cout_total"/>
+                                <field name="cout_reel"/>
+                            </group>
+                            
+                            <field name="prix_budget_line_ids">
+                                <tree editable="bottom">
+                                    <field name="analytic_account_posteD_id" required="1"/>
+                                    <field name="quantite"/>
+                                    <field name="prix_u"/>
+                                    <field name="c_t"/>
+                                    <field name="c_r"/> 
+                                </tree>
+                            </field>
+                        </form>    
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

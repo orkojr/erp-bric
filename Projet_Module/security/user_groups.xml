@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<!-- Accès au budget-->
+
+        <record model="ir.module.category" id="module_budget">
+          <field name="name">Budget</field>
+          <field name="description">Accès module budget aux utilisateurs</field>
+          <field name="sequence">3</field>
+        </record>
+
+        <record id="creation_budget" model="res.groups">
+        <field name="name">Accès creation</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="category_id" ref="module_budget"/>
+        </record>
+
+        <record id="validation_budget" model="res.groups">
+        <field name="name"> Accès validation</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="module_budget"/>
+        </record>
+
+        <record id="modification_budget" model="res.groups">
+        <field name="name">Accès modification</field>
+        <!-- <field name="implied_ids" eval="[(4, ref('Projet_Chantiers.group_user'))]"/> -->
+        <field name="category_id" ref="module_budget"/>
+        </record>
+
+        <record id="suppression_budget" model="res.groups">
+        <field name="name">Accès suppresion</field>
+        <!-- <field name="implied_ids" eval="[(4, ref('Projet_Chantiers.group_user'))]"/> -->
+        <field name="category_id" ref="module_budget"/>
+        </record>
+
+        <record id="lecture_budget" model="res.groups">
+          <field name="name">Accès lecture uniquement</field>
+          <!-- <field name="implied_ids" eval="[(4, ref('Projet_Chantiers.group_user'))]"/> -->
+          <field name="category_id" ref="module_budget"/>
+          </record>
+
+
+  <!-- Accès au projet-->
+        <record model="ir.module.category" id="module_management">
+            <field name="name">Projet</field>
+            <field name="description">Accès module projet aux utilisateurs</field>
+            <field name="sequence">3</field>
+        </record>
+
+
+        <record id="group_lecture" model="res.groups">
+          <field name="name">Accès en lecture</field>
+          <!-- <field name="implied_ids" eval="[(4, ref('Projet_Chantiers.group_user'))]"/> -->
+          <field name="category_id" ref="module_management"/>
+        </record>
+        
+        <record id="group_creation" model="res.groups">
+            <field name="name">Accès creation</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="category_id" ref="module_management"/>
+           </record>
+        
+           <record id="group_validation" model="res.groups">
+             <field name="name"> Accès validation</field>
+             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+             <field name="category_id" ref="module_management"/>
+           </record>
+
+           <record id="group_modification" model="res.groups">
+            <field name="name">Accès modification</field>
+            <!-- <field name="implied_ids" eval="[(4, ref('Projet_Chantiers.group_user'))]"/> -->
+            <field name="category_id" ref="module_management"/>
+          </record>
+
+          <record id="group_suppression" model="res.groups">
+            <field name="name">Accès suppresion</field>
+            <!-- <field name="implied_ids" eval="[(4, ref('Projet_Chantiers.group_user'))]"/> -->
+            <field name="category_id" ref="module_management"/>
+          </record>
+
+
+
+
+
+       <!-- Accès aux engins des projets-->
+
+       <record model="ir.module.category" id="module_engin">
+        <field name="name">Engin</field>
+        <field name="description">Accès module engin aux utilisateurs</field>
+        <field name="sequence">3</field>
+     </record>
+
+     <record id="creation_engin" model="res.groups">
+      <field name="name">Accès creation</field>
+      <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+      <field name="users" eval="[(4, ref('base.user_root'))]"/>
+      <field name="category_id" ref="module_engin"/>
+     </record>
+
+     <record id="validation_engin" model="res.groups">
+      <field name="name"> Accès validation</field>
+      <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+      <field name="category_id" ref="module_engin"/>
+    </record>
+
+    <record id="modification_engin" model="res.groups">
+     <field name="name">Accès modification</field>
+     <!-- <field name="implied_ids" eval="[(4, ref('Projet_Chantiers.group_user'))]"/> -->
+     <field name="category_id" ref="module_engin"/>
+   </record>
+
+   <record id="suppression_engin" model="res.groups">
+     <field name="name">Accès suppresion</field>
+     <!-- <field name="implied_ids" eval="[(4, ref('Projet_Chantiers.group_user'))]"/> -->
+     <field name="category_id" ref="module_engin"/>
+   </record>
+
+   <record id="lecture_engin" model="res.groups">
+    <field name="name">Accès lecture</field>
+    <!-- <field name="implied_ids" eval="[(4, ref('Projet_Chantiers.group_user'))]"/> -->
+    <field name="category_id" ref="module_engin"/>
+  </record>
+
+
+
+
+  <!-- Accès à l'imputation budgétaire-->
+
+  <record model="ir.module.category" id="module_imputation_budget">
+    <field name="name">Imputation Budgétaire</field>
+    <field name="description">Accès à l'imputation budgétaire aux utilisateurs</field>
+    <field name="sequence">3</field>
+  </record>
+  
+  <record id="user_imputation" model="res.groups">
+    <field name="name">Accès en lecture</field>
+    <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    <field name="category_id" ref="module_imputation_budget"/>
+   </record>
+
+   <record id="admin_imputation" model="res.groups">
+    <field name="name">Accès pour modification</field>
+    <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    <field name="category_id" ref="module_imputation_budget"/>
+   </record>
+
+   <record id="no_user_imputation" model="res.groups">
+    <field name="name">Interdire l'accès à l'imputation budgétaire</field>
+    <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    <field name="users" eval="[(4, ref('base.group_user','purchase.group_purchase_user'))]"/>
+    <field name="category_id" ref="module_imputation_budget"/>
+   </record>
+
+   <record id="suppression_imputation" model="res.groups">
+    <field name="name">Accès à la suppression</field>
+    <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    <field name="category_id" ref="module_imputation_budget"/>
+   </record>
+
+
+
+
+
+
+
+
+</odoo>
